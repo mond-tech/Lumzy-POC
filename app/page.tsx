@@ -1,6 +1,6 @@
 import React from "react";
-import HomeRgbSlider from "./components/HomeRgbSlider";
+import HeroSlider from "./components/Hero";
 
 export default function Page() {
-  return <HomeRgbSlider />;
+  return <HeroSlider />;
 }

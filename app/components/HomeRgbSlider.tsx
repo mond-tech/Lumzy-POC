@@ -55,8 +55,8 @@ const HomeRgbSlider: React.FC = () => {
         );
 
         const images = [
-          "https://images.unsplash.com/photo-1523643391907-41e69459a06f?auto=format&fit=crop&w=2069&q=80",
-          "https://images.unsplash.com/photo-1547234935-80c7145ec969?auto=format&fit=crop&w=2074&q=80",
+          "https://images.unsplash.com/photo-1612892483236-52d32a0e0ac1?auto=format&fit=crop&w=2070&q=80",
+          "https://images.unsplash.com/photo-1612892483236-52d32a0e0ac1?auto=format&fit=crop&w=2070&q=80",
           "https://images.unsplash.com/photo-1612892483236-52d32a0e0ac1?auto=format&fit=crop&w=2070&q=80",
         ];
 
@@ -66,15 +66,15 @@ const HomeRgbSlider: React.FC = () => {
           ["Venus", "Surface gravity‎: ‎8.87 m/s²"],
         ];
 
-        if (window.rgbKineticSlider) {
+        if (typeof window.rgbKineticSlider === "function") {
           // eslint-disable-next-line new-cap
-          window.rgbKineticSlider = new window.rgbKineticSlider({
+          new window.rgbKineticSlider({
             slideImages: images,
             itemsTitles: texts,
             backgroundDisplacementSprite:
-              "https://images.unsplash.com/photo-1558865869-c93f6f8482af?auto=format&fit=crop&w=2081&q=80",
+              "https://cdn.jsdelivr.net/gh/hmongouachon/rgbKineticSlider/img/backgroundDisplacement.jpg",
             cursorDisplacementSprite:
-              "https://images.unsplash.com/photo-1558865869-c93f6f8482af?auto=format&fit=crop&w=2081&q=80",
+              "https://cdn.jsdelivr.net/gh/hmongouachon/rgbKineticSlider/img/cursorDisplacement.png",
             cursorImgEffect: true,
             cursorTextEffect: false,
             cursorScaleIntensity: 0.65,
@@ -109,7 +109,11 @@ const HomeRgbSlider: React.FC = () => {
             textSubTitleOffsetTop: 90,
             mobileTextSubTitleOffsetTop: 90,
           });
+        } else {
+          console.error("rgbKineticSlider not found on window", window.rgbKineticSlider);
         }
+      } catch (err) {
+        console.error("rgbKineticSlider init error:", err);
       } finally {
         document.body.classList.remove("loading");
       }

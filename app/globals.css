@@ -143,7 +143,7 @@ body.loading::after {
 }
 
 .card__img {
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
   --columns: 0;
   --rows: 0;
@@ -161,6 +161,7 @@ body.loading::after {
   align-items: center;
   line-height: 1;
   position: relative;
+  z-index: 10;
 }
 
 .card__date::before {
@@ -175,10 +176,13 @@ body.loading::after {
 .card__title {
   font-weight: 400;
   font-size: clamp(1.5rem, 5vw, 2.5rem);
+  position: relative;
+  z-index: 10;
 }
 
 .card__link {
   position: relative;
+  z-index: 10;
 }
 
 .card__link::before {
@@ -280,6 +284,7 @@ body.loading::after {
   .rgb-slider-main .message {
     display: none;
   }
+
   .rgb-slider-main .frame {
     position: fixed;
     text-align: left;
@@ -300,32 +305,39 @@ body.loading::after {
       "... ..."
       "... demos";
   }
+
   .rgb-slider-main .frame__title-wrap {
     grid-area: title;
     display: flex;
   }
+
   .rgb-slider-main .frame__title {
     margin: 0;
   }
+
   .rgb-slider-main .frame__tagline {
     position: relative;
     margin: 0 0 0 1rem;
     padding: 0 0 0 1rem;
     opacity: 0.5;
   }
+
   .rgb-slider-main .frame__demos {
     margin: 0;
     grid-area: demos;
     justify-self: end;
   }
+
   .rgb-slider-main .frame__links {
     grid-area: links;
     padding: 0;
     justify-self: end;
   }
+
   .rgb-slider-main .frame a {
     pointer-events: auto;
   }
+
   .rgb-slider-main .content {
     height: 100vh;
     justify-content: center;
@@ -396,10 +408,10 @@ body.loading::after {
     top: auto;
     bottom: 3rem;
   }
+
   .rgb-slider-main .notice {
     bottom: auto;
     top: 2rem;
     left: 3rem;
   }
 }
-

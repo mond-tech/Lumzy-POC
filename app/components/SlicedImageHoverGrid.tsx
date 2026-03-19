@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
 import Splitting from "splitting";
+import "splitting/dist/splitting.css";
+import "splitting/dist/splitting-cells.css";
 
 type Orientation = "vertical" | "horizontal";
 
@@ -62,11 +64,10 @@ const lettersAndSymbols = [
   ",",
 ];
 
-const preloadImages = (elements: Element[]): Promise<void> => {
+const preloadImages = (selector: string): Promise<void> => {
   return new Promise((resolve) => {
-    // Cast to any to satisfy the callback typing from imagesLoaded
     (imagesLoaded as any)(
-      elements,
+      document.querySelectorAll(selector),
       { background: true },
       () => resolve()
     );
@@ -117,11 +118,29 @@ class HoverCard {
       }
     );
 
-    const style = this.img.getAttribute("style") || "";
-    const match = style.match(/url\((['\"])?(.*?)\1\)/);
-    this.imageURL = match ? match[2] : "";
+    // Try data-img attribute first (most reliable with React)
+    const dataImg = this.img.getAttribute("data-img") || "";
+    if (dataImg) {
+      this.imageURL = dataImg;
+    } else {
+      // Fallback: extract from computed style.backgroundImage
+      const bgImg = this.img.style.backgroundImage || "";
+      const match = bgImg.match(/url\(["']?(.*?)["']?\)/);
+      this.imageURL = match ? match[1] : "";
+    }
 
     this.layout();
+    
+    // Set initial state: hidden and moved
+    const vertical = this.settings.orientation === "vertical";
+    gsap.set(this.img, {
+      [vertical ? "yPercent" : "xPercent"]: 100,
+      opacity: 0,
+    });
+    gsap.set(this.imgWrap, {
+      [vertical ? "yPercent" : "xPercent"]: -100,
+    });
+
     this.initEvents();
   }
 
@@ -131,7 +150,7 @@ class HoverCard {
 
     let slicesStr = "";
     for (let i = 0; i < this.settings.slicesTotal; ++i) {
-      slicesStr += `<div class="card__img-inner" style="background-image:url(${this.imageURL})"></div>`;
+      slicesStr += `<div class="card__img-inner" style="background-image:url('${this.imageURL}')"></div>`;
     }
     this.imgWrap.innerHTML = slicesStr;
     this.slices = this.imgWrap.querySelectorAll(
@@ -161,8 +180,8 @@ class HoverCard {
           ? `polygon(${a1}% 0%, ${b1}% 0%, ${b1}% 100%, ${a1}% 100%)`
           : `polygon(0% ${a1}%, 100% ${a1}%, 100% ${b1}%, 0% ${b1}%)`,
       });
-
-      gsap.set(slice, { [vertical ? "left" : "top"]: position * -1 });
+      // Ensure element is centered (removed position offset for 100% slices)
+      gsap.set(slice, { [vertical ? "left" : "top"]: 0 });
     });
   }
 
@@ -393,7 +412,7 @@ export const SlicedImageHoverGrid: React.FC = () => {
       new HoverCard(el, settings);
     });
 
-    preloadImages(cardElements).then(() => {
+    preloadImages(".card__img").then(() => {
       document.body.classList.remove("loading");
     });
   }, []);
@@ -419,6 +438,7 @@ export const SlicedImageHoverGrid: React.FC = () => {
           <article className="card" key={idx}>
             <div
               className="card__img"
+              data-img={card.img}
               style={{ backgroundImage: `url(${card.img})` }}
             />
             <span className="card__date" data-splitting>

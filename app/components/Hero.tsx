@@ -88,6 +88,47 @@ export default function HeroSlider() {
         textSubTitleOffsetTop: 90,
         mobileTextSubTitleOffsetTop: 60,
       });
+
+      // Helper functions for navigation
+      const nextSlide = () => {
+        const nextBtn = document.querySelector('.main-nav.next') as HTMLElement;
+        if (nextBtn) nextBtn.click();
+      };
+
+      const prevSlide = () => {
+        const prevBtn = document.querySelector('.main-nav.prev') as HTMLElement;
+        if (prevBtn) prevBtn.click();
+      };
+
+      // Auto-play functionality: changes image every 4 seconds
+      const autoPlayInterval = setInterval(nextSlide, 4000);
+
+      // Scroll navigation functionality
+      let lastScrollTime = 0;
+      const scrollThrottle = 1500; // 1.5 seconds cooldown to prevent rapid skipping
+
+      const handleWheel = (e: WheelEvent) => {
+        const now = Date.now();
+        if (now - lastScrollTime < scrollThrottle) return;
+
+        // Check for meaningful scroll delta to avoid jitter
+        if (Math.abs(e.deltaY) > 50) {
+          if (e.deltaY > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+          lastScrollTime = now;
+        }
+      };
+
+      window.addEventListener('wheel', handleWheel, { passive: true });
+
+      // Cleanup listeners and interval on unmount
+      return () => {
+        clearInterval(autoPlayInterval);
+        window.removeEventListener('wheel', handleWheel);
+      };
     }
   }, [dependenciesLoaded]);
 
@@ -142,7 +183,7 @@ export default function HeroSlider() {
               <a href="#" className="main-nav prev" data-nav="previous">Prev <span></span></a>
               <a href="#" className="main-nav next" data-nav="next">Next <span></span></a>
             </nav>
-            <span className="notice">Swipe left... or right</span>
+            <span className="notice">Scroll or Swipe to explore</span>
           </div>
         </main>
       </div>

@@ -1,19 +1,19 @@
 "use client";
- 
+
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
 import Splitting from "splitting";
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
- 
+
 // ─── Character scramble pool ──────────────────────────────────────────────────
 const lettersAndSymbols = [
   'a','b','c','d','e','f','g','h','i','j','k','l','m',
   'n','o','p','q','r','s','t','u','v','w','x','y','z',
   '!','@','#','$','%','^','&','*','-','_','+','=',';',':','<','>',','
 ];
- 
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 export interface CaseStudy {
   title: string;
@@ -22,7 +22,7 @@ export interface CaseStudy {
   src:   string;
   link:  string;
 }
- 
+
 // ─── Clip animation config (one per row of 3 cards) ──────────────────────────
 const SETTINGS = [
   { orientation: 'vertical',   slicesTotal: 5,  animation: { duration: 0.5, ease: 'power3.inOut' } },
@@ -30,7 +30,7 @@ const SETTINGS = [
   { orientation: 'horizontal', slicesTotal: 5,  animation: { duration: 0.6, ease: 'expo.inOut'   } },
   { orientation: 'horizontal', slicesTotal: 15, animation: { duration: 0.6, ease: 'expo.inOut'   } },
 ];
- 
+
 // ─── shuffleChars ─────────────────────────────────────────────────────────────
 function shuffleChars(chars: Element[]) {
   chars.forEach(char => {
@@ -50,22 +50,22 @@ function shuffleChars(chars: Element[]) {
     );
   });
 }
- 
+
 // ─── Single card ──────────────────────────────────────────────────────────────
 const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const imgRef  = useRef<HTMLDivElement>(null);
- 
+
   const settings = SETTINGS[Math.floor(index / 3) % SETTINGS.length];
- 
+
   useEffect(() => {
     if (!cardRef.current || !imgRef.current) return;
- 
+
     const card   = cardRef.current;
     const imgEl  = imgRef.current;
     const isVert = settings.orientation === 'vertical';
     const axis   = isVert ? 'yPercent' : 'xPercent';
- 
+
     // ── Splitting ────────────────────────────────────────────────────────────
     Splitting({ target: card });
     const chars = {
@@ -76,7 +76,7 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
     [...chars.date, ...chars.title, ...chars.link].forEach(el => {
       el.dataset.initial = el.innerHTML;
     });
- 
+
     // ── Build image slices ───────────────────────────────────────────────────
     const wrap = document.createElement('div');
     wrap.className = 'card__img-wrap';
@@ -90,7 +90,7 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
     }
     imgEl.appendChild(wrap);
     imgEl.style.setProperty(isVert ? '--columns' : '--rows', String(settings.slicesTotal));
- 
+
     // ── Clip-paths ───────────────────────────────────────────────────────────
     slices.forEach((slice, pos) => {
       const a1 = pos * 100 / settings.slicesTotal;
@@ -103,7 +103,7 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
         inset: 0,
       });
     });
- 
+
     // ── DOM refs for GSAP color tweens ───────────────────────────────────────
     const DOM = {
       title: card.querySelector('.card__title'),
@@ -112,13 +112,13 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
       index: card.querySelector('.card__index'),
       link:  card.querySelector('.card__link'),
     };
- 
+
     // ── Hover enter ──────────────────────────────────────────────────────────
     const onEnter = () => {
       shuffleChars(chars.date);
       shuffleChars(chars.title);
       shuffleChars(chars.link);
- 
+
       gsap.timeline({ defaults: { duration: settings.animation.duration, ease: settings.animation.ease } })
         .addLabel('start', 0)
         .fromTo(imgEl,  { [axis]: 100, opacity: 0 }, { [axis]: 0, opacity: 1 }, 'start')
@@ -132,7 +132,7 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
         .to(DOM.index, { color: 'var(--gsap-text-index-hover)', textShadow: 'var(--gsap-text-index-shadow)', duration: 0.3 }, 'start+=0.1')
         .to(DOM.link,  { color: 'var(--gsap-text-link-hover)',  duration: 0.3 }, 'start+=0.1')
     };
- 
+
     // ── Hover leave ──────────────────────────────────────────────────────────
     const onLeave = () => {
       gsap.timeline({ defaults: { duration: settings.animation.duration, ease: settings.animation.ease } })
@@ -148,31 +148,31 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
         .to(DOM.index, { color: 'var(--text-accent-secondary)', textShadow: 'none', duration: 0.3 }, 'start')
         .to(DOM.link,  { color: 'var(--text-accent)',           duration: 0.3 }, 'start')
     };
- 
+
     gsap.set(imgEl, { opacity: 0 });
     card.addEventListener('mouseenter', onEnter);
     card.addEventListener('mouseleave', onLeave);
- 
+
     return () => {
       card.removeEventListener('mouseenter', onEnter);
       card.removeEventListener('mouseleave', onLeave);
       wrap.remove();
     };
   }, [project, settings]);
- 
+
   return (
     <article className="card" ref={cardRef}>
       <div className="card__img" ref={imgRef} />
- 
+
       <div className="card__content">
         <div className="card__header">
           <span className="card__index">{(index + 1).toString().padStart(2, '0')}</span>
           <span className="card__date" data-splitting>{project.date}</span>
         </div>
- 
+
         <h3 className="card__title" data-splitting>{project.title}</h3>
         <p className="card__desc">{project.desc}</p>
- 
+
         <div className="card__footer">
           <a href={project.link} className="card__link">
             <span data-splitting>Read More</span>
@@ -185,41 +185,41 @@ const ProjectCard = ({ project, index }: { project: CaseStudy; index: number }) 
     </article>
   );
 };
- 
+
 // ─── Grid wrapper ──────────────────────────────────────────────────────────────
 interface ClipHoverGridProps {
   projects: CaseStudy[];
   header?: React.ReactNode;
   footer?: React.ReactNode;
 }
- 
+
 export default function ClipHoverGrid({ projects, header, footer }: ClipHoverGridProps) {
   const containerRef    = useRef<HTMLDivElement>(null);
   const overlayRef      = useRef<HTMLDivElement>(null);
   const [theme, setTheme]               = useState<'light' | 'dark'>('dark');
   const [isTransitioning, setTransitioning] = useState(false);
- 
+
   useEffect(() => {
     if (!containerRef.current) return;
     imagesLoaded(containerRef.current, { background: true }, () => {
       document.body.classList.remove('loading');
     });
   }, []);
- 
+
   const switchTheme = (next: 'light' | 'dark') => {
     if (next === theme || isTransitioning) return;
     setTransitioning(true);
- 
+
     const overlay = overlayRef.current;
     if (!overlay) { setTheme(next); setTransitioning(false); return; }
- 
+
     // Phase 1: fade overlay in
     overlay.style.opacity = '1';
- 
+
     setTimeout(() => {
       // Phase 2: swap theme while hidden
       setTheme(next);
- 
+
       setTimeout(() => {
         // Phase 3: fade overlay back out
         overlay.style.opacity = '0';
@@ -227,14 +227,14 @@ export default function ClipHoverGrid({ projects, header, footer }: ClipHoverGri
       }, 60);
     }, 300);
   };
- 
+
   return (
     <div className="clip-hover-wrapper" data-theme={theme}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
- 
+
       {/* ── Crossfade overlay (covers gradient snap) ── */}
       <div className="theme-overlay" ref={overlayRef} />
- 
+
       {/* ── Theme Toggle ── */}
       <div className="theme-toggle">
         <button
@@ -252,7 +252,7 @@ export default function ClipHoverGrid({ projects, header, footer }: ClipHoverGri
           Midnight
         </button>
       </div>
- 
+
       <div className="page-layout">
         {header}
         <section className="card-grid" ref={containerRef}>
@@ -265,55 +265,55 @@ export default function ClipHoverGrid({ projects, header, footer }: ClipHoverGri
     </div>
   );
 }
- 
+
 // ─── CSS ──────────────────────────────────────────────────────────────────────
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&family=Jost:wght@300;400&family=Space+Grotesk:wght@700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap%27);
- 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&family=Jost:wght@300;400&family=Space+Grotesk:wght@700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap');
+
 /* Pre-connect for faster font loading */
 /* Both font stacks are loaded immediately so theme switch doesn't trigger fresh fetches */
- 
- 
+
+
 /* Slowed down for an 'ambient' look */
- 
+
 @keyframes meshGrad {
   0%   { background-position: 0%   50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0%   50%; }
 }
- 
+
 @keyframes liquidGlass {
   0%   { background-position: 0%   0%;   }
   50%  { background-position: 100% 100%; }
   100% { background-position: 0%   0%;   }
 }
- 
+
 /* ─────────────────────────────────────────────────────────────────────────────
    THEME TOKENS
 ───────────────────────────────────────────────────────────────────────────── */
- 
+
 /* ── Opal (Light) ── */
 .clip-hover-wrapper[data-theme='light'] {
   /* Backgrounds */
   --bg-grad:        linear-gradient(-45deg, #F8F9FA, #FFF5F5, #F0F9FF, #F5F3FF, #F8F9FA);
   --card-bg:        linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(240, 249, 255, 0.4) 35%, rgba(245, 243, 255, 0.2) 70%, rgba(255, 255, 255, 0.65) 100%);
   --card-shadow-idle:  inset 0 1px 1.5px rgba(255,255,255,0.9), inset 0 -20px 50px rgba(255,255,255,0.4),  0 10px 30px -10px rgba(0,0,0,0.03);
-  --card-shadow-hover:
+  --card-shadow-hover: 
     inset 0 0 8px 1px rgba(139,92,246,0.5),
-    inset 0 0 25px 3px rgba(99,102,241,0.2),
+    inset 0 0 25px 3px rgba(99,102,241,0.2), 
     inset 0 0 50px 5px rgba(139,92,246,0.1),
     0 15px 45px -10px rgba(0,0,0,0.08);
   --img-overlay:    linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0) 80%);
   --img-glow:       radial-gradient(circle at center, rgba(99,102,241,0.35), transparent 85%);
   --glow-blur: 18px;
- 
+
   /* Text */
   --text-default:          #1D1D1F;
   --text-muted:            #64748B;
   --text-accent:           #6366f1;
   --text-accent-secondary: #818cf8;
   --line-color:            #e2e8f0;
- 
+
   /* GSAP hover overrides */
   --gsap-text-title-hover: #ffffff;
   --gsap-text-title-shadow: none;
@@ -323,12 +323,12 @@ const CSS = `
   --gsap-text-index-shadow: none;
   --gsap-text-link-hover:  #ffffff;
   --gsap-line-hover:       rgba(255,255,255,0.3);
- 
+
   /* Border glow opacity */
   --glow-opacity-idle:  0.6;
   --glow-opacity-hover: 0.85;
   --glow-blur: 14px;
- 
+
   /* Typography — Cormorant Garamond Bold Italic (H1) + Jost Light (body) */
   --heading-font:      'Cormorant Garamond', Georgia, serif;
   --heading-weight:    700;
@@ -338,7 +338,7 @@ const CSS = `
   --body-weight:       300;
   --body-condensed:    normal;
   --body-ls:           normal;
- 
+
   /* Toggle pill */
   --toggle-bg:           rgba(255,255,255,0.6);
   --toggle-border:       rgba(0,0,0,0.05);
@@ -346,29 +346,29 @@ const CSS = `
   --toggle-active-bg:    #fff;
   --toggle-active-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
- 
+
 /* ── Midnight (Dark) ── */
 .clip-hover-wrapper[data-theme='dark'] {
   /* Backgrounds */
   --bg-grad:        linear-gradient(-35deg, #04060b, #0B0F19, #080C14, #0B0F19, #04060b);
   --card-bg:        linear-gradient(135deg, rgba(8,10,15,0.85) 0%, rgba(12,15,22,0.45) 35%, rgba(6,182,212,0.05) 75%, rgba(8,10,15,0.7) 100%);
   --card-shadow-idle:  inset 0 1px 1px rgba(255,255,255,0.08), inset 0 -20px 50px rgba(0,0,0,0.8),  0 10px 40px -10px rgba(0,0,0,0.6);
-  --card-shadow-hover:
+  --card-shadow-hover: 
     inset 0 0 10px 1px rgba(6,182,212,0.8),
-    inset 0 0 30px 2px rgba(6,182,212,0.4),
+    inset 0 0 30px 2px rgba(6,182,212,0.4), 
     inset 0 0 60px 5px rgba(6,182,212,0.2),
     0 25px 70px rgba(0,0,0,0.9);
   --img-overlay:    linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0) 80%);
   --img-glow:       radial-gradient(circle at center, rgba(6,182,212,0.45), transparent 90%);
   --glow-blur: 24px;
- 
+
   /* Text */
   --text-default:          #ffffff;
   --text-muted:            #94a3b8;
   --text-accent:           #38bdf8;
   --text-accent-secondary: #38bdf8;
   --line-color:            #334155;
- 
+
   /* GSAP hover overrides */
   --gsap-text-title-hover: #ffffff;
   --gsap-text-title-shadow: 0 0 15px rgba(255,255,255,0.3);
@@ -378,11 +378,11 @@ const CSS = `
   --gsap-text-index-shadow: 0 0 10px rgba(6,182,212,0.5);
   --gsap-text-link-hover:  #22d3ee;
   --gsap-line-hover:       #06b6d4;
- 
+
   /* Border glow opacity */
   --glow-opacity-idle:  0.8;
   --glow-opacity-hover: 1;
- 
+
   /* Typography — Space Grotesk Bold (H1) + IBM Plex Sans (body) */
   --heading-font:      'Space Grotesk', 'Inter', sans-serif;
   --heading-weight:    700;
@@ -392,7 +392,7 @@ const CSS = `
   --body-weight:       400;
   --body-condensed:    normal;
   --body-ls:           0.01em;
- 
+
   /* Toggle pill */
   --toggle-bg:           rgba(8,10,15,0.65);
   --toggle-border:       rgba(255,255,255,0.08);
@@ -400,7 +400,7 @@ const CSS = `
   --toggle-active-bg:    #0f131a;
   --toggle-active-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
- 
+
 /* ─────────────────────────────────────────────────────────────────────────────
    WRAPPER
 ───────────────────────────────────────────────────────────────────────────── */
@@ -414,7 +414,7 @@ const CSS = `
   animation: meshGrad 18s ease infinite;
   transition: background 0.8s ease, color 0.8s ease;
 }
- 
+
 .page-layout {
   display: flex;
   flex-direction: column;
@@ -423,7 +423,7 @@ const CSS = `
   z-index: 10;
   width: 100%;
 }
- 
+
 /* ── Crossfade overlay: covers gradient snap during theme switch ── */
 .theme-overlay {
   position: fixed;
@@ -435,7 +435,7 @@ const CSS = `
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity;
 }
- 
+
 /* ── Cinematic Grain Texture ── */
 .clip-hover-wrapper::after {
   content: "";
@@ -448,7 +448,7 @@ const CSS = `
   mix-blend-mode: overlay;
 }
 [data-theme='dark'].clip-hover-wrapper::after { opacity: 0.04; }
- 
+
 /* ── Theme-aware page heading ── */
 .clip-hover-wrapper h1 {
   font-family: var(--heading-font);
@@ -458,7 +458,7 @@ const CSS = `
   letter-spacing: -0.02em;
   transition: color 0.5s ease;
 }
- 
+
 /* ── Theme-aware subheadings and description (page header only) ── */
 .clip-hover-wrapper > .page-layout > header p,
 .clip-hover-wrapper > .page-layout > header h2,
@@ -469,7 +469,7 @@ const CSS = `
   font-stretch: var(--body-condensed);
   transition: color 0.5s ease;
 }
- 
+
 /* ─────────────────────────────────────────────────────────────────────────────
    THEME TOGGLE
 ───────────────────────────────────────────────────────────────────────────── */
@@ -508,7 +508,7 @@ const CSS = `
   color: var(--text-default);
   box-shadow: var(--toggle-active-shadow);
 }
- 
+
 /* ─────────────────────────────────────────────────────────────────────────────
    CARD GRID
 ───────────────────────────────────────────────────────────────────────────── */
@@ -521,7 +521,7 @@ const CSS = `
 }
 @media (min-width: 900px)  { .card-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1280px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
- 
+
 /* ─────────────────────────────────────────────────────────────────────────────
    CARD SHELL
 ───────────────────────────────────────────────────────────────────────────── */
@@ -547,14 +547,14 @@ const CSS = `
     background 0.5s ease,
     border-color 0.5s ease;
 }
- 
- 
+
+
 .card:hover {
   transform: translateY(-8px);
   box-shadow: var(--card-shadow-hover);
   background: radial-gradient(circle at center, color-mix(in srgb, var(--gsap-line-hover), transparent 60%) 0%, transparent 95%), var(--card-bg);
 }
- 
+
 /* ── Image overlay ── */
 .card__img {
   position: absolute;
@@ -567,7 +567,7 @@ const CSS = `
   background-size: cover;
   background-position: center;
 }
- 
+
 /* Dark gradient so text remains readable + Internal image glow bleed */
 .card__img::after {
   content: "";
@@ -579,15 +579,15 @@ const CSS = `
   opacity: 1;
   transition: background 0.5s ease;
 }
- 
+
 .card:hover .card__img {
   box-shadow: var(--card-shadow-hover);
 }
- 
+
 .card:hover .card__img::after {
   background: var(--img-glow), var(--img-overlay);
 }
- 
+
 .card__img-wrap {
   position: absolute;
   inset: 0;
@@ -598,7 +598,7 @@ const CSS = `
   transform: scale(1.05);
   transition: filter 0.5s ease, transform 1.2s cubic-bezier(0.1, 0, 0.1, 1);
 }
- 
+
 .card__img-inner {
   position: absolute;
   inset: 0;
@@ -607,7 +607,7 @@ const CSS = `
   filter: brightness(1.05) contrast(1.05);
   will-change: filter, transform;
 }
- 
+
 /* ── Card content ── */
 .card__content {
   position: relative;
@@ -615,7 +615,7 @@ const CSS = `
   width: 100%;
   pointer-events: none;
 }
- 
+
 .card__header {
   display: flex;
   align-items: center;
@@ -628,8 +628,8 @@ const CSS = `
 }
 .card__index { color: var(--text-accent-secondary); font-weight: 700; transition: color 0.5s; }
 .card__date  { color: var(--text-muted); transition: color 0.5s; }
- 
- 
+
+
 .card__title {
   font-size: clamp(1.35rem, 1.9vw, 1.8rem);
   font-weight: 500;
@@ -648,9 +648,9 @@ const CSS = `
   max-width: 88%;
   transition: color 0.5s ease;
 }
- 
+
 .card__footer { margin-top: auto; }
- 
+
 .card__link {
   pointer-events: auto;
   display: inline-flex;
@@ -665,9 +665,7 @@ const CSS = `
   transition: gap 0.3s ease, color 0.5s ease, text-shadow 0.3s ease;
 }
 .card__link:hover { gap: 0.9rem; }
- 
+
 /* ── Splitting.js ── */
 .char { display: inline-block; white-space: pre; }
 `;
- 
- 

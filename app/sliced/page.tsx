@@ -1,99 +1,96 @@
 "use client";
- 
-import React, { useMemo } from "react";
-import dynamic from "next/dynamic";
-import { CaseStudy } from "./ClipHoverGrid";
 
-const ClipHoverGrid = dynamic(() => import("./ClipHoverGrid"), { ssr: false });
- 
+import React, { useMemo } from "react";
+import ClipHoverGrid, { CaseStudy } from "./ClipHoverGrid";
+
 export default function ClipHoverArchivePage() {
   const projects: CaseStudy[] = useMemo(() => [
-    {
-      title: "ERP System Revamp",
-      desc: "Streamlining enterprise operations with intelligent data flows.",
-      date: "03/12/2026",
-      src: "/HorizontalParallaxGallery/erp_v2.png",
-      link: "#"
+    { 
+      title: "ERP System Revamp", 
+      desc: "Streamlining enterprise operations with intelligent data flows.", 
+      date: "03/12/2026", 
+      src: "/HorizontalParallaxGallery/erp_v2.png", 
+      link: "#" 
     },
-    {
-      title: "AI Assistant UI",
-      desc: "Futuristic customer experience with neural network interfaces.",
-      date: "03/15/2026",
-      src: "/HorizontalParallaxGallery/ai_v2.png",
-      link: "#"
+    { 
+      title: "AI Assistant UI", 
+      desc: "Futuristic customer experience with neural network interfaces.", 
+      date: "03/15/2026", 
+      src: "/HorizontalParallaxGallery/ai_v2.png", 
+      link: "#" 
     },
-    {
-      title: "E-Commerce Core",
-      desc: "Robust marketplace architecture for global brand scaling.",
-      date: "03/18/2026",
-      src: "/HorizontalParallaxGallery/ecommerce_v2.jpg",
-      link: "#"
+    { 
+      title: "E-Commerce Core", 
+      desc: "Robust marketplace architecture for global brand scaling.", 
+      date: "03/18/2026", 
+      src: "/HorizontalParallaxGallery/ecommerce_v2.jpg", 
+      link: "#" 
     },
-    {
-      title: "Healthcare Portal",
-      desc: "Confidential telemedicine bridge between doctors and patients.",
-      date: "03/20/2026",
-      src: "/HorizontalParallaxGallery/health_v2.png",
-      link: "#"
+    { 
+      title: "Healthcare Portal", 
+      desc: "Confidential telemedicine bridge between doctors and patients.", 
+      date: "03/20/2026", 
+      src: "/HorizontalParallaxGallery/health_v2.png", 
+      link: "#" 
     },
-    {
-      title: "Real Estate VR",
-      desc: "Total spatial immersion for the world's most luxurious property tours.",
-      date: "03/22/2026",
-      src: "/HorizontalParallaxGallery/real_v2.png",
-      link: "#"
+    { 
+      title: "Real Estate VR", 
+      desc: "Total spatial immersion for the world's most luxurious property tours.", 
+      date: "03/22/2026", 
+      src: "/HorizontalParallaxGallery/real_v2.png", 
+      link: "#" 
     },
-    {
-      title: "FinTech Dashboard",
-      desc: "Absolute security meets high-performance financial analytics.",
-      date: "03/23/2026",
-      src: "/HorizontalParallaxGallery/fintech_v2.png",
-      link: "#"
+    { 
+      title: "FinTech Dashboard", 
+      desc: "Absolute security meets high-performance financial analytics.", 
+      date: "03/23/2026", 
+      src: "/HorizontalParallaxGallery/fintech_v2.png", 
+      link: "#" 
     },
-    {
-      title: "Logistics Hub",
-      desc: "Mapping the neural network of global freight and supply chain.",
-      date: "03/24/2026",
-      src: "/HorizontalParallaxGallery/logistics_v2.jpg",
-      link: "#"
+    { 
+      title: "Logistics Hub", 
+      desc: "Mapping the neural network of global freight and supply chain.", 
+      date: "03/24/2026", 
+      src: "/HorizontalParallaxGallery/logistics_v2.jpg", 
+      link: "#" 
     },
-    {
-      title: "Smart Booking",
-      desc: "Intelligent scheduling for high-precision event coordination.",
-      date: "03/25/2026",
-      src: "/HorizontalParallaxGallery/booking_v2.jpg",
-      link: "#"
+    { 
+      title: "Smart Booking", 
+      desc: "Intelligent scheduling for high-precision event coordination.", 
+      date: "03/25/2026", 
+      src: "/HorizontalParallaxGallery/booking_v2.jpg", 
+      link: "#" 
     },
-    {
-      title: "SaaS CRM Pro",
-      desc: "Crystal-clear visibility into high-velocity sales funnels.",
-      date: "03/26/2026",
-      src: "/HorizontalParallaxGallery/crm_v2.jpg",
-      link: "#"
+    { 
+      title: "SaaS CRM Pro", 
+      desc: "Crystal-clear visibility into high-velocity sales funnels.", 
+      date: "03/26/2026", 
+      src: "/HorizontalParallaxGallery/crm_v2.jpg", 
+      link: "#" 
     },
-    {
-      title: "LMS Academy",
-      desc: "Digital learning portals for the next generation of industry leaders.",
-      date: "03/27/2026",
-      src: "/HorizontalParallaxGallery/lms_v2.jpg",
-      link: "#"
+    { 
+      title: "LMS Academy", 
+      desc: "Digital learning portals for the next generation of industry leaders.", 
+      date: "03/27/2026", 
+      src: "/HorizontalParallaxGallery/lms_v2.jpg", 
+      link: "#" 
     },
-    {
-      title: "Smart City Systems",
-      desc: "Automated traffic and utility grid management for futuristic metropolises.",
-      date: "03/29/2026",
-      src: "/HorizontalParallaxGallery/ecommerce_v2.jpg",
-      link: "#"
+    { 
+      title: "Smart City Systems", 
+      desc: "Automated traffic and utility grid management for futuristic metropolises.", 
+      date: "03/29/2026", 
+      src: "/HorizontalParallaxGallery/ecommerce_v2.jpg", 
+      link: "#" 
     },
-    {
-      title: "Neuro-Link Interface",
-      desc: "Deep-neural connectivity for seamless human-machine interaction.",
-      date: "03/30/2026",
-      src: "/HorizontalParallaxGallery/ai_v2.png",
-      link: "#"
+    { 
+      title: "Neuro-Link Interface", 
+      desc: "Deep-neural connectivity for seamless human-machine interaction.", 
+      date: "03/30/2026", 
+      src: "/HorizontalParallaxGallery/ai_v2.png", 
+      link: "#" 
     },
   ], []);
- 
+
   return (
     <main className="font-inter">
       <style dangerouslySetInnerHTML={{
@@ -101,8 +98,8 @@ export default function ClipHoverArchivePage() {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         .font-inter { font-family: 'Inter', sans-serif; }
       `}} />
- 
-      <ClipHoverGrid
+
+      <ClipHoverGrid 
         projects={projects}
         header={
           <header className="mb-[12vh] flex flex-col md:flex-row justify-between items-start md:items-end gap-10 relative z-10 w-full pt-10">
@@ -140,5 +137,3 @@ export default function ClipHoverArchivePage() {
     </main>
   );
 }
- 
- 

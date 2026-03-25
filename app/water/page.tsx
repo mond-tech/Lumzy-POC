@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-const WaterWrapper = dynamic(() => import("@/components/WaterWrapper"), { ssr: false });
+const WaterWrapper = dynamic(() => import("@/components/specific/water/WaterWrapper"), { ssr: false });
 
 export default function WaterPage() {
   return (
@@ -35,14 +35,14 @@ export default function WaterPage() {
       </WaterWrapper>
 
       <div className="mt-20 grid grid-cols-2 gap-8 w-full max-w-7xl">
-         <WaterWrapper intensity={60} className="rounded-3xl overflow-hidden aspect-[16/10]">
+         <WaterWrapper className="rounded-3xl overflow-hidden aspect-[16/10]">
             <img 
                src="/ocean.jpg" 
                alt="Water" 
                className="w-full h-full object-cover"
             />
          </WaterWrapper>
-         <WaterWrapper intensity={20} className="rounded-3xl overflow-hidden aspect-[16/10] bg-blue-900 flex items-center justify-center">
+         <WaterWrapper className="rounded-3xl overflow-hidden aspect-[16/10] bg-blue-900 flex items-center justify-center">
             <div className="text-white text-6xl font-black italic">
                SLOW WATER
             </div>

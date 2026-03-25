@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useMemo } from "react";
-import ClipHoverGrid, { CaseStudy } from "./ClipHoverGrid";
+import dynamic from "next/dynamic";
+const ClipHoverGrid = dynamic(() => import("../../components/specific/sliced/ClipHoverGrid"), { ssr: false });
+import type { CaseStudy } from "../../components/specific/sliced/ClipHoverGrid";
 
 export default function ClipHoverArchivePage() {
   const projects: CaseStudy[] = useMemo(() => [

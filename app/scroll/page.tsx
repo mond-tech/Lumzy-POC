@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-const HorizontalParallaxGallery = dynamic(() => import("../components/HorizontalParallaxGallery"), { ssr: false });
+const HorizontalParallaxGallery = dynamic(() => import("../../components/specific/parallax/HorizontalParallaxGallery"), { ssr: false });
  
 export default function Test2() {
     return (

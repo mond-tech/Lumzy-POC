@@ -2,17 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
-const WaterWrapper = dynamic(() => import("@/components/WaterWrapper"), { ssr: false });
+// const WaterWrapper = dynamic(() => import("@/components/WaterWrapper"), { ssr: false });
 
 const POC_LIST = [
-  {
-    title: "Liquid Slider",
-    desc: "RGB Kinetic displacement with fluid transitions.",
-    path: "/slider",
-    color: "from-orange-500/20 to-transparent",
-  },
   {
     title: "Water Shader",
     desc: "Interactive fluid simulation overlay for any content.",
@@ -31,6 +25,18 @@ const POC_LIST = [
     path: "/scroll",
     color: "from-emerald-500/20 to-transparent",
   },
+  {
+    title: "On-Scroll Gallery",
+    desc: "Infinite smooth scrolling image gallery with perspective.",
+    path: "/gallery",
+    color: "from-rose-500/20 to-transparent",
+  },
+    {
+    title: "Liquid Slider",
+    desc: "RGB Kinetic displacement with fluid transitions.",
+    path: "/slider",
+    color: "from-orange-500/20 to-transparent",
+  },
 ];
 
 export default function Home() {
@@ -42,7 +48,7 @@ export default function Home() {
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px]" />
         <div className="absolute bottom-[0%] right-[0%] w-[30%] h-[30%] bg-blue-600/10 rounded-full blur-[100px]" />
       </div>
-      
+
       {/* Grain Overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay bg-grain" />
 
@@ -65,15 +71,15 @@ export default function Home() {
         {/* Nav Grid */}
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
           {POC_LIST.map((poc, i) => (
-            <Link 
-              key={poc.path} 
+            <Link
+              key={poc.path}
               href={poc.path}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative block p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-500 overflow-hidden"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${poc.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-              
+
               <div className="relative flex flex-col h-full">
                 <span className="text-neutral-600 font-mono text-xs mb-8">0{i + 1}</span>
                 <h2 className="text-4xl font-bold italic tracking-tight mb-3 group-hover:translate-x-2 transition-transform duration-500">
@@ -82,7 +88,7 @@ export default function Home() {
                 <p className="text-neutral-400 text-sm leading-relaxed max-w-[26ch] group-hover:text-neutral-200 transition-colors duration-500">
                   {poc.desc}
                 </p>
-                
+
                 <div className="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors duration-500">
                   Explore POC
                   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:translate-x-1 transition-transform">

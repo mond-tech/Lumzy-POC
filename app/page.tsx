@@ -2,7 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import WaterWrapper from "@/components/WaterWrapper";
+import dynamic from "next/dynamic";
+
+const WaterWrapper = dynamic(() => import("@/components/WaterWrapper"), { ssr: false });
 
 const POC_LIST = [
   {

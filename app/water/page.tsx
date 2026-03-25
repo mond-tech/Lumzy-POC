@@ -1,6 +1,7 @@
 "use client";
 
-import WaterWrapper from "@/components/WaterWrapper";
+import dynamic from "next/dynamic";
+const WaterWrapper = dynamic(() => import("@/components/WaterWrapper"), { ssr: false });
 
 export default function WaterPage() {
   return (

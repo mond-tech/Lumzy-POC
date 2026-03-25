@@ -54,7 +54,7 @@ export default function Home() {
           </h1>
           <div className="relative">
             <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase mb-2">
-              Lumpzy Lab
+              Lumzy Lab
             </h1>
             <p className="text-neutral-500 font-mono text-sm tracking-[0.3em] uppercase">
               Experimental Web Interfaces & Shaders
@@ -68,6 +68,8 @@ export default function Home() {
             <Link 
               key={poc.path} 
               href={poc.path}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative block p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-500 overflow-hidden"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${poc.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
@@ -94,7 +96,7 @@ export default function Home() {
 
         {/* Footer info */}
         <footer className="mt-24 text-neutral-600 font-mono text-[10px] uppercase tracking-[0.5em] pb-12">
-          &copy; 2026 Antigravity x Lumpzy • Advanced Front-end Exploration
+          &copy; 2026 Lumzy • Advanced Front-end Exploration
         </footer>
       </div>
     </main>

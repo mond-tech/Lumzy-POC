@@ -77,10 +77,10 @@ a:focus {
 .content {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: calc(100vh - 13rem);
+  width: 100vw;
+  height: 100vh;
   position: relative;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 

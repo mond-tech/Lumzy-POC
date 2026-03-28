@@ -8,8 +8,14 @@ import * as THREE from "three";
 
 const DogModel = dynamic(() => import("./Dog"), { ssr: false });
 
+export type GalleryItem = {
+  src: string;
+  title: string;
+  bgColor: string;
+};
+
 type GsapCarouselGalleryProps = {
-  images: string[];
+  images: (string | GalleryItem)[];
   radius?: number;
   spiralStep?: number;
   imagesPerTurn?: number;
@@ -36,7 +42,15 @@ export default function GsapCarouselGallery({
   maxRotationSpeed = 0.15,
   rotationSmoothing = 0.09,
 }: GsapCarouselGalleryProps) {
-  const count = images.length;
+  const items: GalleryItem[] = useMemo(() => {
+    return images.map(item =>
+      typeof item === "string"
+        ? { src: item, title: "Temporal Echo", bgColor: "black" }
+        : item
+    );
+  }, [images]);
+
+  const count = items.length;
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -269,16 +283,37 @@ export default function GsapCarouselGallery({
       }}
     >
       {/* Background Ambience exactly like sheriyans */}
-      <div 
-        className="absolute inset-0 pointer-events-none" 
-        style={{ 
-          zIndex: -1, 
-          backgroundImage: "url(/background-l.png)", 
-          backgroundRepeat: "no-repeat", 
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+        style={{
+          zIndex: -1,
+          backgroundImage: "url(/background-l.png)",
+          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          backgroundColor: "black" 
-        }} 
+          backgroundColor: "black",
+          opacity: hoveredIndex !== null ? 0 : 1
+        }}
       />
+
+      {/* Hover Backgrounds */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        {items.map((item, i) => (
+          <div
+            key={`bg-${i}`}
+            className="absolute inset-0 transition-opacity duration-300"
+            style={{
+              opacity: hoveredIndex === i ? 1 : 0,
+              backgroundColor: item.bgColor,
+            }}
+          >
+            <img
+              src={item.src}
+              alt={item.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
 
       {/* Integrated Center 3D Wolf Canvas */}
       <div
@@ -304,9 +339,9 @@ export default function GsapCarouselGallery({
         </Canvas>
       </div>
 
-      {images.map((src, i) => (
+      {items.map((item, i) => (
         <div
-          key={`${src}-${i}`}
+          key={`${item.src}-${i}`}
           className="absolute left-1/2 top-1/2"
           style={{
             transform: "translate(-50%, -50%)",
@@ -325,7 +360,7 @@ export default function GsapCarouselGallery({
             ref={(node) => {
               itemRefs.current[i] = node;
             }}
-            className="group cursor-pointer"
+            className="group cursor-pointer bg-black/20"
             style={{
               backfaceVisibility: "visible",
               willChange: "transform, opacity",
@@ -337,8 +372,8 @@ export default function GsapCarouselGallery({
           >
             <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-500 z-10" />
             <img
-              src={src}
-              alt=""
+              src={item.src}
+              alt={item.title}
               draggable={false}
               style={{
                 width: "100%",
@@ -394,7 +429,7 @@ export default function GsapCarouselGallery({
 
             <div>
               <h3 className="text-2xl font-bold italic tracking-tight text-white mb-2 uppercase">
-                Temporal Echo
+                {hoveredIndex !== null ? items[hoveredIndex].title : "Temporal Echo"}
               </h3>
               <p className="text-white/50 text-xs leading-relaxed font-light tracking-wide">
                 A capture of light and shadow, frozen within the spiral of time. This fragment represents the intersection of digital craft and artistic intent.

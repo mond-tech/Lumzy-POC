@@ -70,7 +70,7 @@ export default function DogModel() {
     <group ref={groupRef}>
       <primitive
         object={model.scene}
-        position={[0, -0.15, 0]}
+        position={[0.07, -0.2, 0]}
         scale={0.4}
       />
       <directionalLight position={[0, 5, 5]} intensity={5} />

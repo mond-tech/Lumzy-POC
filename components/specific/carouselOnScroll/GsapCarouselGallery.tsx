@@ -2,6 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import dynamic from "next/dynamic";
+import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
+
+const DogModel = dynamic(() => import("./Dog"), { ssr: false });
 
 type GsapCarouselGalleryProps = {
   images: string[];
@@ -257,15 +262,46 @@ export default function GsapCarouselGallery({
         setHoveredIndex(null);
         setLinePoints(null);
       }}
-      className="w-full h-full absolute inset-0 overflow-hidden bg-black"
+      className="w-full h-full absolute inset-0 overflow-hidden"
       style={{
         perspective: "4600px",
         transformStyle: "preserve-3d",
       }}
     >
-      {/* Background Ambience */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-white/[0.02] blur-[150px] rounded-full" />
+      {/* Background Ambience exactly like sheriyans */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ 
+          zIndex: -1, 
+          backgroundImage: "url(/background-l.png)", 
+          backgroundRepeat: "no-repeat", 
+          backgroundSize: "cover",
+          backgroundColor: "black" 
+        }} 
+      />
+
+      {/* Integrated Center 3D Wolf Canvas */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none"
+        style={{ zIndex: 1000 }}
+      >
+        <Canvas
+          camera={{ position: [0, 0, 0.55], fov: 50 }}
+          gl={{
+            toneMapping: THREE.ReinhardToneMapping,
+            antialias: true,
+            powerPreference: "high-performance",
+            alpha: true,
+            preserveDrawingBuffer: false,
+            failIfMajorPerformanceCaveat: false
+          }}
+          style={{ width: "100%", height: "100%" }}
+          onCreated={({ gl }) => {
+            gl.outputColorSpace = THREE.SRGBColorSpace;
+          }}
+        >
+          <DogModel />
+        </Canvas>
       </div>
 
       {images.map((src, i) => (
@@ -344,19 +380,18 @@ export default function GsapCarouselGallery({
       {/* Details Card */}
       <div
         ref={cardRef}
-        className={`absolute bottom-12 left-12 z-[5000] transition-all duration-700 ease-out ${
-          hoveredIndex !== null ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
-        }`}
+        className={`absolute bottom-12 left-12 z-[5000] transition-all duration-700 ease-out ${hoveredIndex !== null ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
+          }`}
       >
         <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-8 rounded-[2rem] w-80 shadow-2xl">
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">Item Details</span>
-              <span className="text-[10px] font-mono text-white/60">0{ (hoveredIndex ?? 0) + 1 }</span>
+              <span className="text-[10px] font-mono text-white/60">0{(hoveredIndex ?? 0) + 1}</span>
             </div>
-            
+
             <div className="h-px w-full bg-gradient-to-r from-white/20 to-transparent" />
-            
+
             <div>
               <h3 className="text-2xl font-bold italic tracking-tight text-white mb-2 uppercase">
                 Temporal Echo

@@ -18,7 +18,7 @@ const DEFAULT_IMAGES = [
   { src: "/navy-pier.png", title: "Navy Pier 2", bgColor: "rgb(4, 7, 24)" },
   { src: "/msi-chicago.png", title: "MSI Chicago 2", bgColor: "rgb(4, 7, 24)" },
   { src: "/phone.png", title: "This Was Louise’s Phone 2", bgColor: "rgb(4, 7, 24)" },
-  { src: "/msi-chicago.png", title: "MSI Chicago", bgColor: "rgb(4, 7, 24)" },
+  { src: "/curch.png", title: "MSI Chicago", bgColor: "rgb(4, 7, 24)" },
   { src: "/kikk.png", title: "KIKK Festival 2018 2", bgColor: "rgba(1, 15, 92, 0.679)" },
   { src: "/kennedy.png", title: "The Kennedy Center 2", bgColor: "rgb(4, 7, 24)" },
 ];
@@ -29,7 +29,7 @@ export default function GalleryRoute() {
       {/* Premium minimal header */}
       <header className="absolute top-0 inset-x-0 z-30 p-8 flex items-center justify-between pointer-events-auto mix-blend-difference">
         <Link href="/" className="text-white text-lg font-medium tracking-wide hover:opacity-70 transition-opacity">
-          LUMPZY
+          LUMZY
         </Link>
         <div className="text-white/60 text-sm tracking-[0.2em] uppercase font-light">
           Immersive Gallery

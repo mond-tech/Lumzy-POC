@@ -1611,7 +1611,7 @@ section.about
 	background: var(--black);
 	padding-top: 44px;
 	padding-bottom: 47px;
-	margin-top: 50px;
+	margin-top: 0px;
     margin-bottom: 130px;
 }
 .marquee_container_inner

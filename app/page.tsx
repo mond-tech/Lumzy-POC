@@ -8,6 +8,18 @@ import Link from "next/link";
 
 const POC_LIST = [
   {
+    title: "Market Mirror POC 1",
+    desc: "Market Mirror POC with dynamic reflections and refractions.",
+    path: "/square",
+    color: "from-pink-500/20 to-transparent",
+  },
+  {
+    title: "Market Mirror POC 2",
+    desc: "Market Mirror POC with dynamic reflections and refractions.",
+    path: "/marketpoc",
+    color: "from-violet-500/20 to-transparent",
+  },
+  {
     title: "Water Shader",
     desc: "Interactive fluid simulation overlay for any content.",
     path: "/water",

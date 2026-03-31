@@ -1,0 +1,24 @@
+@media (max-width: 1100px) {
+  .seox-hero-content, .seox-stats-grid, .seox-services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem;
+  }
+  .seox-hero-visuals { margin-bottom: 4rem; order: -1; }
+  .seox-hero-circle-mask { width: 350px !important; height: 350px !important; }
+  .seox-title { font-size: 3.5rem !important; }
+  .seox-stats-cards { grid-template-columns: 1fr !important; margin-top: 3rem; }
+  .seox-stat-card:nth-child(n) { transform: none !important; }
+}
+
+@media (max-width: 860px) {
+  .seox-menu { display: none !important; } /* Hide menu on mobile for now as per user request to 'remove' the toggle */
+  .seox-nav-btn { display: none !important; }
+  .seox-title { font-size: 2.8rem !important; }
+}
+
+@media (max-width: 480px) {
+  .seox-title { font-size: 2.2rem !important; }
+  .seox-audit-form { flex-direction: column; border-radius: 20px; padding: 1.5rem; }
+  .seox-audit-form input { padding: 0.8rem 0; text-align: center; }
+  .seox-hero-circle-mask { width: 280px !important; height: 280px !important; }
+}

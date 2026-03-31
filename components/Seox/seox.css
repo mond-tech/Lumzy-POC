@@ -1,0 +1,573 @@
+/* ──────────────────────────────────────────────────────────
+  SEOX POC STYLES
+──────────────────────────────────────────────────────────── */
+
+.seox-body {
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background-color: #0b0f19;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.seox-body h1,
+.seox-body h2,
+.seox-body h3,
+.seox-body h4 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
+.seox-container {
+  max-width: 1320px;
+  width: 92%;
+  margin: 0 auto;
+}
+
+/* ─── Hero Section ────────────────────────────────────────── */
+.seox-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0b0f19;
+  overflow: hidden;
+  padding-top: 140px;
+  padding-bottom: 1rem;
+}
+
+/* Abstract Mesh Glows */
+.seox-glow-red {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(168, 44, 44, 0.3) 0%, rgba(11, 15, 25, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.seox-glow-blue {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(44, 80, 168, 0.3) 0%, rgba(11, 15, 25, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Mesh Grid Pattern */
+.seox-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: perspective(500px) rotateX(45deg) scale(2);
+  transform-origin: top center;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.seox-header {
+  position: absolute;
+  /* Static on hero section initially */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  padding: 0.5rem 0;
+}
+
+.seox-header.is-scrolled {
+  position: fixed;
+  /* Becomes moving/sticky */
+  background: rgba(11, 15, 25, 0.8);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0;
+  animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.seox-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.seox-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  z-index: 10;
+}
+
+.seox-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.seox-menu li {
+  display: flex;
+  align-items: center;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.seox-menu li:hover {
+  opacity: 0.8;
+  color: #bbfc2c;
+}
+
+.seox-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 10;
+}
+
+.seox-btn-primary {
+  background-color: #bbfc2c;
+  color: #000;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.seox-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(187, 252, 44, 0.25);
+}
+
+.seox-hero-content {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 6rem;
+}
+
+.seox-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #c4ff33;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.seox-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.seox-desc {
+  font-size: 1.1rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  max-width: 90%;
+  margin-bottom: 2.5rem;
+}
+
+.seox-audit-form {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 0.5rem;
+  max-width: 480px;
+}
+
+.seox-audit-form input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  padding: 0 1.5rem;
+  color: #fff;
+  outline: none;
+}
+
+.seox-audit-form button {
+  background-color: #fff;
+  color: #000;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.seox-audit-form button:hover {
+  background-color: #e5e7eb;
+}
+
+/* Hero Visuals */
+.seox-hero-visuals {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seox-hero-circle-mask {
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  overflow: hidden;
+  position: relative;
+}
+
+.seox-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.seox-floating-element {
+  position: absolute;
+  z-index: 20;
+  animation: float 6s ease-in-out infinite;
+}
+
+.seox-element-rocket {
+  top: 10%;
+  right: -5%;
+  width: 120px;
+  animation-delay: -1s;
+}
+
+.seox-element-target {
+  bottom: 0%;
+  left: 5%;
+  width: 140px;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* ─── Stats Section ───────────────────────────────────────── */
+.seox-stats-section {
+  background-color: #fff;
+  color: #0b0f19;
+  padding: 8rem 0;
+}
+
+.seox-stats-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.seox-stats-info h2 {
+  font-size: 3.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 2.5rem;
+  color: #0b0f19;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.seox-stats-info p {
+  color: #4b5563;
+  font-size: 1.07rem;
+  line-height: 1.8;
+  max-width: 480px;
+  margin-top: 0;
+}
+
+.seox-stats-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual Card Styling */
+.seox-stat-card {
+  position: relative;
+  background-color: #0b0f19;
+  color: #fff;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 420px;
+  width: 100%;
+}
+
+/* Staggering removed for better alignment as per user request */
+.seox-stat-card:nth-child(n) {
+  transform: none;
+}
+
+.seox-stat-card h3 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.seox-stat-card p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 10;
+}
+
+.seox-stat-number {
+  margin-top: auto;
+  font-size: 3.8rem;
+  font-weight: 800;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Card Glow Overlays */
+.seox-card-glow {
+  position: absolute;
+  bottom: -20%;
+  right: -20%;
+  width: 150%;
+  height: 150%;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.glow-1 {
+  background: radial-gradient(circle at bottom right, #ef4444 0%, transparent 60%);
+}
+
+.glow-2 {
+  background: radial-gradient(circle at bottom right, #db2777 0%, transparent 60%);
+}
+
+.glow-3 {
+  background: radial-gradient(circle at bottom right, #3b82f6 0%, transparent 60%);
+}
+
+
+/* ─── Services Section ────────────────────────────────────── */
+.seox-services-section {
+  background-color: #fff;
+  color: #0b0f19;
+  padding: 2rem 0 8rem;
+}
+
+.seox-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.seox-service-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.seox-services-grid h2 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.seox-services-grid p {
+  color: #4b5563;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.seox-services-visual {
+  width: 100%;
+  height: 480px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.seox-services-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Footer Section ───────────────────────────────────────── */
+.seox-footer {
+  background-color: #0b0f19;
+  color: #fff;
+  padding: 6rem 0 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.seox-footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.seox-footer-logo img {
+  max-width: 150px;
+}
+
+.seox-footer-socials {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.seox-footer-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.seox-footer-link:hover {
+  color: #fff;
+}
+
+.seox-footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-bottom: 2rem;
+}
+
+.seox-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seox-footer-bottom .seox-footer-copy {
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.seox-footer-legal {
+  display: flex;
+  gap: 2.5rem;
+}
+
+@media (max-width: 860px) {
+
+  .seox-footer-top,
+  .seox-footer-bottom {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+/* ─── Partner Bar Section ────────────────────────────────── */
+.seox-partner-bar {
+  background-color: #0b0f19;
+  padding: 4rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.seox-partner-scroll {
+  width: 100%;
+  overflow: hidden;
+}
+
+.seox-partner-track {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  width: fit-content;
+}
+
+.seox-partner-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  opacity: 0.2;
+  filter: grayscale(1);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.seox-partner-logo:hover {
+  opacity: 0.5;
+}

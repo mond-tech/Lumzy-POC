@@ -1,0 +1,148 @@
+
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg-color:        #1a1a1a;
+  --bg-darker:       #151515;
+  --surface-color:   #222222;
+  --text-primary:    #ffffff;
+  --text-secondary:  #aaaaaa;
+  --accent-blue:     #3258e8;
+  --border-color:    rgba(255, 255, 255, 0.08);
+  --font-main:       'Inter', sans-serif;
+  --font-heading:    'Poppins', sans-serif;
+  --transition-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s var(--transition-smooth);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─── Layout ─────────────────────────────────────────────────────── */
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.container {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 4vw;
+  box-sizing: border-box;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
+/* ─── Pick #2: Thin-rule section dividers ─────────────────────── */
+/* Every section gets a 1px top border — no heavy backgrounds needed */
+#services,
+#works {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+.site-footer {
+  padding: 6rem 0 3rem;
+  background-color: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-social-link {
+  color: #888;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.footer-social-link:hover { color: white; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal-link {
+  color: #666;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+.footer-legal-link:hover { color: white; }
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  h1 { font-size: 3rem !important; }
+
+  .footer-top,
+  .footer-bottom { flex-direction: column; gap: 1.5rem; }
+}

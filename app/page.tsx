@@ -19,6 +19,27 @@ const POC_LIST = [
     status: "Active",
   },
   {
+    title: "Market Mirror POC 3",
+    desc: "Market Mirror POC with dynamic reflections and refractions.",
+    path: "/marketpoc2",
+    color: "from-pink-500/20 to-transparent",
+    status: "Stable",
+  },
+  {
+    title: "Market Mirror POC 4",
+    desc: "Market Mirror POC with dynamic reflections and refractions.",
+    path: "/seox",
+    color: "from-violet-500/20 to-transparent",
+    status: "Active",
+  },
+  {
+    title: "Market Mirror POC 4",
+    desc: "Market Mirror POC with dynamic reflections and refractions.",
+    path: "/blossom",
+    color: "from-violet-500/20 to-transparent",
+    status: "Active",
+  },
+  {
     title: "Water Shader",
     desc: "Interactive fluid simulation overlay for any content.",
     path: "/water",

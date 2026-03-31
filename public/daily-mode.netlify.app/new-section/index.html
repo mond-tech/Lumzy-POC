@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preload" href="../_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" crossorigin=""
+    type="font/woff2" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=200&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=200&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=200&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=200&amp;q=80" />
+  <link rel="stylesheet" href="../_next/static/css/fbb1b9ccfef5946d.css" crossorigin="" data-precedence="next" />
+  <link rel="preload" as="script" fetchpriority="low" href="../_next/static/chunks/webpack-33af00d9a2263b05.js"
+    crossorigin="" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=80" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <title>MODIFIED: Daily Mode - Digital Agency</title>
+  <!-- ANTIGRAVITY_WATERMARK -->
+
+  <meta name="description" content="Digital poweor platforms &amp; AI" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" sizes="16x16" />
+  <meta name="next-size-adjust" />
+  <style>
+    /* Reset JS animation hidden states */
+    .hero-title,
+    .text-reveal-trigger {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+
+    /* Restore natural cursor */
+    * {
+      cursor: auto !important;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-inner {
+      animation: marquee 25s linear infinite;
+    }
+
+    .reveal-text {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body class="__className_5c4a2f antialiased">
+
+  <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-black" id="navbar">
+    <div class="container mx-auto px-6 py-5 md:px-12 max-w-7xl flex justify-between items-center">
+      <div class="hover:scale-105 transition-transform cursor-pointer">
+        <img src="assets/logoblack.webp" alt="Market Mirror" style="height: 60px; width: auto;">
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="/"
+          class="nav-link cursor-pointer hidden md:block text-sm font-medium transition-colors relative text-gray-600 hover:text-black">About</a><a
+          href="/"
+          class="nav-link hidden md:block text-sm font-medium transition-colors relative text-gray-600 hover:text-black">Services</a><a
+          href="/#"
+          class="nav-link hidden md:block text-sm font-medium transition-colors relative text-gray-600 hover:text-black">Work</a><a
+          href="/#"
+          class="nav-link hidden md:block text-sm font-medium transition-colors relative text-gray-600 hover:text-black">Blog</a><a
+          href="/#"
+          class="nav-link hidden md:block text-sm font-medium transition-colors relative text-gray-600 hover:text-black">Careers</a><button
+          class="bg-[#d1fa3c] text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-black hover:text-[#d1fa3c] transition-all duration-300 border border-transparent hover:border-[#d1fa3c] flex items-center justify-center">
+          Contact</button><button id="mobile-menu-toggle"
+          class="lg:hidden p-2 rounded transition-colors flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div id="mobile-menu"
+    class="fixed top-[72px] left-0 w-full backdrop-blur-md z-40 transition-all duration-300 lg:hidden bg-white/95 text-black opacity-0 invisible -translate-y-4">
+    <div class="container mx-auto max-w-7xl">
+      <div class="flex flex-col px-6 py-6 gap-4">
+        <a href="/"
+          class="text-lg font-medium transition-colors py-2 border-b border-gray-200 text-gray-700 hover:text-black">About</a><a
+          href="services"
+          class="text-lg font-medium transition-colors py-2 border-b border-gray-200 text-gray-700 hover:text-black">Services</a><a
+          href="work"
+          class="text-lg font-medium transition-colors py-2 border-b border-gray-200 text-gray-700 hover:text-black">Work</a><a
+          href="blog"
+          class="text-lg font-medium transition-colors py-2 border-b border-gray-200 text-gray-700 hover:text-black">Blog</a><a
+          href="careers"
+          class="text-lg font-medium transition-colors py-2 border-b border-gray-200 text-gray-700 hover:text-black">Careers</a><button
+          class="bg-[#d1fa3c] text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-black hover:text-[#d1fa3c] transition-all duration-300 border border-transparent hover:border-[#d1fa3c] mt-2">
+          Contact
+        </button>
+      </div>
+    </div>
+  </div>
+  <main>
+    <section
+      class="md:min-h-screen minWH700:!h-[670px] minWH700:!min-h-full pt-32 flex flex-col items-center relative overflow-hidden"
+      id="platforms">
+      <div
+        class="absolute inset-0 bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:40px_40px]">
+      </div>
+      <div class="absolute inset-0 flex flex-wrap pointer-events-none" style="gap: 0" id="hero-grid"></div>
+      <div
+        class="container mx-auto px-6 md:px-12 max-w-7xl relative flex flex-col items-center md:min-h-[calc(100vh-8rem)]">
+        <div
+          class="md:block hidden absolute top-1/3 minWH700:!top-[13%] left-[4%] xl:left-0 w-40 xs:w-48 h-56 xs:h-64 overflow-hidden rounded-lg shadow-xl parallax-img z-0 opacity-100 transition-opacity duration-1000 hero-img animate-float">
+          <img src="assets/hero_team.png"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500" alt="Team" />
+        </div>
+        <div
+          class="hidden absolute bottom-[15%] minWH700:!bottom-[60%] right-0 md:flex flex-col items-end gap-4 z-10 opacity-100 transition-opacity duration-1000 hero-img max-w-xs animate-float-slow">
+          <div class="w-40 xl:w-48 h-40 xl:h-48 md:w-56 md:h-56 parallax-img relative">
+            <img src="assets/circlewithcolor.png"
+              class="w-full h-full object-cover rounded-full shadow-2xl grayscale hover:grayscale-0 transition duration-500 hover:scale-105"
+              alt="Abstract 3D Shape" />
+            <div class="absolute -inset-4 bg-gray-200/50 rounded-full blur-xl -z-10"></div>
+          </div>
+        </div>
+        <div class="z-20 text-center mt-10 pb-6 md:mt-20 mix-blend-multiply">
+          <div class="overflow-hidden">
+            <h1
+              class="reveal-text hero-title text-[14vw] md:text-[12vw] xl:text-[150px] leading-[0.9] font-extrabold tracking-tighter uppercase text-black">
+              FOR YOUR
+            </h1>
+          </div>
+          <div class="overflow-hidden">
+            <h1
+              class="reveal-text hero-title text-[14vw] md:text-[12vw] xl:text-[145px] leading-[0.9] font-extrabold tracking-tighter uppercase text-black">
+              GROWTH
+            </h1>
+          </div>
+          <div class="reveal-text mt-8 opacity-100 transition-opacity duration-1000 hero-btn">
+            <button
+              class="border border-gray-300 px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-300 flex items-center gap-2 group mx-auto bg-white/50 backdrop-blur-sm">
+              Challenge Us
+              <!-- <span
+                  class="group-hover:rotate-90 transition-transform duration-300"
+                  >â†“</span
+                > -->
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-20" id="about">
+      <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+        <div
+          class="flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-12 opacity-50 grayscale mb-24 logo-strip">
+          <h3 class="font-bold text-xl">Data Hub</h3>
+          <h3 class="font-bold text-xl">UX/CX</h3>
+          <h3 class="font-bold text-xl">Media</h3>
+          <h3 class="font-bold text-xl">Retail</h3>
+          <h3 class="font-bold text-xl">B2B</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+          <div class="md:col-span-3">
+            <div
+              class="reveal-text flex items-center gap-2 text-[#d1fa3c] font-bold uppercase text-xs tracking-widest mb-4">
+              <span class="w-2 h-2 bg-[#d1fa3c] rounded-full"></span> About us
+            </div>
+            <p class="reveal-text text-gray-400 text-sm leading-relaxed max-w-xs">
+              Established in 2009, we are a full service market research firm
+              aspire to be a reliable research partner for clients.
+            </p>
+          </div>
+          <div class="md:col-span-9">
+            <h2 class="reveal-text text-3xl lg:text-6xl font-medium leading-relaxed">
+              Valuably operating in the MR world for nearly a
+              decade &amp; our team performed superb in handling the client’s
+              needs with innovative techniques.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="reveal-text pt-13 pb-20 overflow-hidden relative" id="campaigns">
+      <div class="marquee-section relative left-[-10%] w-[120%] bg-transparent">
+        <div class="marquee-inner flex whitespace-nowrap gap-8 text-2xl md:text-4xl font-bold uppercase tracking-wider"
+          style="-webkit-text-stroke: 1px black; color: transparent">
+          <div class="flex gap-8 items-center">
+            <span>Better Performance</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span>Better Performance</span><span
+              class="text-[#d1fa3c]" style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span>
+          </div>
+          <div class="flex gap-8 items-center">
+            <span>Better Performance</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span>Better Performance</span><span
+              class="text-[#d1fa3c]" style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span>
+          </div>
+          <div class="flex gap-8 items-center">
+            <span>Better Performance</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span>Better Performance</span><span
+              class="text-[#d1fa3c]" style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span>
+          </div>
+          <div class="flex gap-8 items-center">
+            <span>Better Performance</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span>Better Performance</span><span
+              class="text-[#d1fa3c]" style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span><span class="text-black"
+              style="-webkit-text-stroke: 0; color: black">Good Vibes</span><span class="text-[#d1fa3c]"
+              style="-webkit-text-stroke: 0; color: #d1fa3c">☀</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="cases" class="reveal-text pb-24 mt-10 bg-white">
+      <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+        <div class="mb-16">
+          <h2 class="reveal-text text-5xl md:text-7xl font-bold tracking-tight mb-4">
+            Our Work
+          </h2>
+          <p class="reveal-text text-gray-600 text-lg max-w-2xl">
+            Selected projects showcasing our team&#x27;s expertise
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="group cursor-pointer">
+            <div class="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-gray-100">
+              <img src="assets/case_ecommerce.png" alt="Wristler"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+              <div class="absolute top-4 right-4 text-white text-sm font-bold bg-black/50 px-3 py-1 rounded-full">
+                2024
+              </div>
+            </div>
+            <div class="reveal-text space-y-2">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">E-COMMERCE</span>
+              <h3 class="text-2xl font-semibold">Wristler</h3>
+              <p class="text-sm text-gray-600">
+                +5,500 watch listings after launch
+              </p>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <div class="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-gray-100">
+              <img src="assets/case_creative.png" alt="Urban Creative"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+              <div class="absolute top-4 right-4 text-white text-sm font-bold bg-black/50 px-3 py-1 rounded-full">
+                2024
+              </div>
+            </div>
+            <div class="reveal-text space-y-2">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">PLATFORMS</span>
+              <h3 class="text-2xl font-semibold">Urban Creative</h3>
+              <p class="text-sm text-gray-600">A digital partnership</p>
+            </div>
+          </div>
+          <!-- <div class="group cursor-pointer">
+            <div class="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-gray-100">
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                alt="TechFlow"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+              <div class="absolute top-4 right-4 text-white text-sm font-bold bg-black/50 px-3 py-1 rounded-full">
+                2024
+              </div>
+            </div>
+            <div class="space-y-2">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">AI</span>
+              <h3 class="text-2xl font-semibold">TechFlow</h3>
+              <p class="text-sm text-gray-600">
+                AI-powered workflow automation
+              </p>
+            </div>
+          </div> -->
+          <!-- <div class="group cursor-pointer">
+            <div class="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-gray-100">
+              <img
+                src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                alt="GreenSpace"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+              <div class="absolute top-4 right-4 text-white text-sm font-bold bg-black/50 px-3 py-1 rounded-full">
+                2023
+              </div>
+            </div>
+            <div class="space-y-2">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">PLATFORMS</span>
+              <h3 class="text-2xl font-semibold">GreenSpace</h3>
+              <p class="text-sm text-gray-600">
+                Sustainable living marketplace
+              </p>
+            </div>
+          </div> -->
+        </div>
+        <div class="flex justify-center mt-16 mb-16">
+          <a href="/#"><button
+              class="border border-gray-900 px-8 py-3 rounded-full text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+              View All Work
+            </button></a>
+        </div>
+      </div>
+    </section>
+    </div>
+  </main>
+  <script>
+    window.addEventListener("scroll", () => {
+      const nav = document.getElementById("navbar");
+      if (window.scrollY > 50) {
+        nav.classList.remove("bg-transparent");
+        nav.classList.add("bg-white", "shadow-sm");
+      } else {
+        nav.classList.add("bg-transparent");
+        nav.classList.remove("bg-white", "shadow-sm");
+      }
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && mobileMenu) {
+      const originalIcon = menuToggle.innerHTML;
+      const closeIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('opacity-0');
+        mobileMenu.classList.toggle('opacity-100');
+        mobileMenu.classList.toggle('invisible');
+        mobileMenu.classList.toggle('translate-y-0');
+        mobileMenu.classList.toggle('-translate-y-4');
+
+        const isOpen = !mobileMenu.classList.contains('invisible');
+        menuToggle.innerHTML = isOpen ? closeIcon : originalIcon;
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-4');
+          mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+          menuToggle.innerHTML = originalIcon;
+        });
+      });
+    }
+
+    // GSAP Scroll Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.utils.toArray('.reveal-text').forEach(item => {
+        gsap.fromTo(item,
+          {
+            opacity: 0,
+            y: 30
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      });
+    });
+
+    // Dynamic Grid Highlights - Continuous Movement
+    setTimeout(() => {
+      const grid = document.getElementById('hero-grid');
+      if (!grid) return;
+      const boxSize = 40;
+      const squares = [];
+
+      // Create initial squares
+      for (let i = 0; i < 3; i++) {
+        const square = document.createElement('div');
+        square.style.position = 'absolute';
+        square.style.width = boxSize + 'px';
+        square.style.height = boxSize + 'px';
+        square.style.backgroundColor = '#d1fa3c';
+        square.style.opacity = '0';
+        square.style.transition = 'left 0.6s ease-in-out, top 0.6s ease-in-out, opacity 0.8s ease';
+        grid.appendChild(square);
+        squares.push(square);
+      }
+
+      let squareIndex = 0;
+      const moveSquare = () => {
+        const cols = Math.floor(window.innerWidth / boxSize);
+        const rows = Math.floor(window.innerHeight / boxSize);
+        const col = Math.floor(Math.random() * cols);
+        const row = Math.floor(Math.random() * rows);
+
+        const sq = squares[squareIndex];
+        sq.style.left = (col * boxSize) + 'px';
+        sq.style.top = (row * boxSize) + 'px';
+        sq.style.opacity = '0.7'; // Slight transparency for a more technical look
+
+        squareIndex = (squareIndex + 1) % squares.length;
+      };
+
+      // Initial jump-start
+      squares.forEach((_, i) => setTimeout(moveSquare, i * 150));
+
+      // Infinite sequence
+      setInterval(moveSquare, 300);
+    }, 500);
+  </script>
+</body>
+
+</html>

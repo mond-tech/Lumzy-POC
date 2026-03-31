@@ -12,11 +12,11 @@ const LumzyPoc: React.FC = () => {
       <div id="work">
         <Works />
       </div>
-      
+
       {/* ─── Footer Section ────────────────────────────────── */}
-      <footer className="seox-footer" style={{ 
-        backgroundColor: '#0b0f19', 
-        padding: '60px 0 30px', 
+      <footer className="seox-footer" style={{
+        backgroundColor: '#0b0f19',
+        padding: '60px 0 30px',
         borderTop: '1px solid rgba(255,255,255,0.05)',
         color: '#fff',
         fontFamily: 'Plus Jakarta Sans, sans-serif'
@@ -32,11 +32,11 @@ const LumzyPoc: React.FC = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="seox-footer-divider" style={{ height: '1px', backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: '40px' }}></div>
-          
+
           <div className="seox-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', opacity: '0.5', fontSize: '0.85rem' }}>
-            <div>© 2026 Lumzy Insights Pvt. Ltd. All rights reserved.</div>
+            <div>© 2026 Lumzy. All rights reserved.</div>
             <div style={{ display: 'flex', gap: '30px' }}>
               <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Privacy Policy</a>
               <a href="#" style={{ color: '#fff', textDecoration: 'none' }}>Terms of Service</a>

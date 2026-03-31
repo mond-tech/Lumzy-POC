@@ -158,7 +158,7 @@ const BlossomPoc: React.FC = () => {
               </motion.div>
             </motion.div>
           </AnimatePresence>
-          
+
           <button className="hero-nav prev" onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}>
             <i className="fa-solid fa-chevron-left"></i>
           </button>
@@ -296,12 +296,12 @@ const BlossomPoc: React.FC = () => {
                 <a href="#"><i className="fa-brands fa-instagram"></i></a>
               </div>
             </div>
-            
+
             <hr className="footer-divider" />
-            
+
             <div className="footer-bottom">
               <div className="footer-copyright">
-                © 2026 Lumzy Insights Pvt. Ltd. All rights reserved.
+                © 2026 Lumzy. All rights reserved.
               </div>
               <div className="footer-legal">
                 <a href="#">Privacy Policy</a>

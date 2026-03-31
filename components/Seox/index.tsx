@@ -276,7 +276,7 @@ const SeoxPoc: React.FC = () => {
 
           <div className="seox-footer-bottom">
             <div className="seox-footer-copy">
-              © 2026 Lumzy Insights Pvt. Ltd. All rights reserved.
+              © 2026 Lumzy. All rights reserved.
             </div>
             <div className="seox-footer-legal">
               <a href="#" className="seox-footer-link">Privacy Policy</a>

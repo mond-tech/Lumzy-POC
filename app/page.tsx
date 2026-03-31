@@ -33,7 +33,7 @@ const POC_LIST = [
     status: "Active",
   },
   {
-    title: "UI/UX POC 4",
+    title: "UI/UX POC 5",
     desc: "UI/UX POC with dynamic reflections and refractions.",
     path: "/blossom",
     color: "from-violet-500/20 to-transparent",

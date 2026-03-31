@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import LabBackground from "@/components/LabBackground";
 import PocCard from "@/components/PocCard";
 

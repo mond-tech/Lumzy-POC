@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Lumpzy Poc",
   description: "Created by Lumpzy",
+  icons: {
+    icon: "/logolumzy.jpg",
+  },
 };
 
 export default function RootLayout({

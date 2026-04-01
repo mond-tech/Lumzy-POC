@@ -1,10 +1,10 @@
 "use client";
- 
+
 import React, { useEffect, useRef, useMemo } from "react";
 import * as THREE from "three";
 import imagesLoaded from "imagesloaded";
 import gsap from "gsap";
- 
+
 const vertexShader = `
 precision highp float;
 varying vec2 vUv;
@@ -17,11 +17,12 @@ void main() {
  
   float distortion = sin(uv.x * 3.1415) * uSpeed * 3.0;
   pos.z += distortion;
+  pos.xy *= uFocusScale;
  
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
 `;
- 
+
 const fragmentShader = `
 precision highp float;
  
@@ -51,9 +52,14 @@ vec2 coverUv(vec2 uv, vec2 resolution, vec2 imageResolution) {
 }
  
 void main() {
-  vec2 uv = coverUv(vUv, uResolution, uImageResolution);
-  uv.x += uParallax * uShaderMultiplier;
- 
+  vec2 ratio = vec2(
+    min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
+    min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
+  );
+  
+  // Safe parallax: only move within the cropped area
+  vec2 uv = vUv * ratio + (1.0 - ratio) * (0.5 + uParallax * 0.5);
+  
   float zoom = mix(uUvScale, uUvScale * 0.95, uHover);
   uv -= 0.5;
   uv *= zoom;
@@ -84,7 +90,7 @@ void main() {
   gl_FragColor = vec4(col, 1.);
 }
 `;
- 
+
 const reflectionFragmentShader = `
 precision highp float;
  
@@ -120,8 +126,14 @@ void main() {
   float roughness = 0.003;
   float distortion = (random(vUv * 50.0 + uTime * 0.5) - 0.5) * roughness;
  
-  vec2 uv = coverUv(vec2(vUv.x + distortion, 1.0 - vUv.y + distortion), uResolution, uImageResolution);
-  uv.x += uParallax * uShaderMultiplier;
+  vec2 ratio = vec2(
+    min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
+    min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
+  );
+  
+  vec2 baseUv = vec2(vUv.x + distortion, 1.0 - vUv.y + distortion);
+  vec2 uv = baseUv * ratio + (1.0 - ratio) * (0.5 + uParallax * 0.5);
+  
   uv -= 0.5;
   uv *= uUvScale;
   uv += 0.5;
@@ -140,7 +152,7 @@ void main() {
   gl_FragColor = vec4(col, fade);
 }
 `;
- 
+
 const backgroundVertexShader = `
 varying vec2 vUv;
 void main() {
@@ -148,7 +160,7 @@ void main() {
   gl_Position = vec4(position, 1.0);
 }
 `;
- 
+
 const backgroundFragmentShader = `
 precision highp float;
 varying vec2 vUv;
@@ -176,7 +188,7 @@ void main() {
   gl_FragColor = vec4(col, 1.0);
 }
 `;
- 
+
 const constellationVertexShader = `
 uniform float uTime;
 uniform vec2 uMouse;
@@ -197,7 +209,7 @@ void main() {
   gl_Position = projectionMatrix * mvPosition;
 }
 `;
- 
+
 const constellationFragmentShader = `
 precision highp float;
 varying float vAlpha;
@@ -211,16 +223,16 @@ void main() {
   gl_FragColor = vec4(uColor, vAlpha * glow);
 }
 `;
- 
+
 const clamp = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value));
 const lerp = (start: number, end: number, t: number) => start + (end - start) * t;
- 
+
 export default function HorizontalParallaxGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
- 
+
   const projects = useMemo(() => [
     {
       title: "ERP SYSTEM",
@@ -267,7 +279,7 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
     {
-      title: "REAL ESTATE VR",
+      title: "REAL ESTATE",
       desc: "VIRTUAL LISTING HUB",
       features: "BROWSE • TOUR • INVEST",
       src: "/HorizontalParallaxGallery/real_v2.png",
@@ -333,17 +345,17 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
   ], []);
- 
+
   useEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
     const main = mainRef.current;
     const root = rootRef.current;
     if (!container || !wrapper || !main || !root) return;
- 
+
     let destroyed = false;
     let animId: number;
- 
+
     const domImages = Array.from(container.querySelectorAll<HTMLImageElement>(".gallery__media__image__gl"));
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -356,19 +368,19 @@ export default function HorizontalParallaxGallery() {
     renderer.domElement.style.zIndex = "1";
     renderer.domElement.style.pointerEvents = "none";
     document.body.appendChild(renderer.domElement);
- 
+
     const scene = new THREE.Scene();
     const fov = 2 * Math.atan(window.innerHeight / 2 / 100) * (180 / Math.PI);
     const camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.01, 1000);
     camera.position.set(0, 0, 100);
- 
+
     const bgScene = new THREE.Scene();
     const bgCamera = new THREE.Camera();
- 
+
     const group = new THREE.Group();
     const reflectionGroup = new THREE.Group();
     scene.add(group); scene.add(reflectionGroup);
- 
+
     const count = 180;
     const posArray = new Float32Array(count * 3);
     const offsetArray = new Float32Array(count);
@@ -378,17 +390,17 @@ export default function HorizontalParallaxGallery() {
       posArray[i * 3 + 2] = -50 - Math.random() * 100;
       offsetArray[i] = Math.random() * 1000;
     }
- 
+
     const constellationGeo = new THREE.BufferGeometry();
     const posBuffer = new THREE.BufferAttribute(posArray, 3);
     const offsetBuffer = new THREE.BufferAttribute(offsetArray, 1);
- 
+
     const constellationUniforms = {
       uTime: { value: 0 },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uColor: { value: new THREE.Color("#64748b") }
     };
- 
+
     const constellationMat = new THREE.ShaderMaterial({
       uniforms: constellationUniforms,
       vertexShader: constellationVertexShader,
@@ -396,12 +408,12 @@ export default function HorizontalParallaxGallery() {
       transparent: true,
       depthTest: false,
     });
- 
+
     const points = new THREE.Points(constellationGeo, constellationMat);
     constellationGeo.setAttribute('position', posBuffer);
     constellationGeo.setAttribute('aOffset', offsetBuffer);
     scene.add(points);
- 
+
     const bgGeometry = new THREE.PlaneGeometry(2, 2);
     const bgMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -413,17 +425,17 @@ export default function HorizontalParallaxGallery() {
       depthTest: false,
     });
     bgScene.add(new THREE.Mesh(bgGeometry, bgMaterial));
- 
+
     const geometry = new THREE.PlaneGeometry(1, 1, 64, 64);
     const scroll = { current: 0, target: 0, ease: 0.05, limit: 0, offset: 0, speed: 0 };
-    const params = { parallaxIntensity: 0.35, uvScale: 0.85, shaderMultiplier: 1.0 };
- 
+    const params = { parallaxIntensity: 0.4, uvScale: 0.85, shaderMultiplier: 1.0 };
+
     const glMedias = domImages.map((el, i) => {
       const texture = new THREE.TextureLoader().load(el.src, (tex) => {
         material.uniforms.uImageResolution.value.set(tex.image.width, tex.image.height);
         reflectionMaterial.uniforms.uImageResolution.value.set(tex.image.width, tex.image.height);
       });
- 
+
       const commonUniforms = {
         uTexture: { value: texture },
         uResolution: { value: new THREE.Vector2(1, 1) },
@@ -437,23 +449,23 @@ export default function HorizontalParallaxGallery() {
         uFocusScale: { value: 1 },
         uBlur: { value: 0 }
       };
- 
+
       const material = new THREE.ShaderMaterial({
         uniforms: { ...commonUniforms, uHover: { value: 0 } },
         vertexShader, fragmentShader,
       });
- 
+
       const reflectionMaterial = new THREE.ShaderMaterial({
         uniforms: { ...commonUniforms },
-        vertexShader: vertexShader.replace('pos.xy *= uFocusScale;', 'pos.xy *= uFocusScale;'),
+        vertexShader,
         fragmentShader: reflectionFragmentShader,
         transparent: true,
       });
- 
+
       const mesh = new THREE.Mesh(geometry, material);
       const reflectionMesh = new THREE.Mesh(geometry, reflectionMaterial);
       group.add(mesh); reflectionGroup.add(reflectionMesh);
- 
+
       const item = el.closest('.gallery__item__gl');
       if (item) {
         item.addEventListener('mouseenter', () => {
@@ -463,7 +475,7 @@ export default function HorizontalParallaxGallery() {
           gsap.to(material.uniforms.uHover, { value: 0, duration: 0.8, ease: "power2.out" });
         });
       }
- 
+
       return {
         el, mesh, reflectionMesh, material, reflectionMaterial, texture, bounds: el.getBoundingClientRect(), distance: 0, id: i,
         updateScale: function () {
@@ -481,11 +493,11 @@ export default function HorizontalParallaxGallery() {
           this.reflectionMesh.position.set(x, y - this.bounds.height - 2, 0);
           this.distance = x / window.innerWidth;
         },
-        updateParallax: function (sc: number, speed: number, time: number) {
+        updateParallax: function (sc: number, speed: number, time: number, scale: number) {
           const absDist = Math.abs(this.distance);
           const blur = clamp(absDist * 2.0, 0, 1.0);
           const focus = 1.0 - clamp(absDist * 1.5, 0, 1.0);
- 
+
           this.material.uniforms.uBlur.value = blur;
           this.material.uniforms.uFocus.value = focus;
           this.reflectionMaterial.uniforms.uFocus.value = focus;
@@ -495,10 +507,13 @@ export default function HorizontalParallaxGallery() {
           this.reflectionMaterial.uniforms.uSpeed.value = speed;
           this.material.uniforms.uTime.value = time;
           this.reflectionMaterial.uniforms.uTime.value = time;
+
+          this.material.uniforms.uFocusScale.value = scale;
+          this.reflectionMaterial.uniforms.uFocusScale.value = scale;
         }
       };
     });
- 
+
     const setLimit = () => {
       const trans = container.style.transform; container.style.transform = "none";
       const first = glMedias[0].el.getBoundingClientRect();
@@ -507,7 +522,7 @@ export default function HorizontalParallaxGallery() {
       scroll.offset = window.innerWidth / 2 - first.width / 2 - first.left;
       scroll.limit = last.left - first.left;
     };
- 
+
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.fov = 2 * Math.atan(window.innerHeight / 2 / 100) * (180 / Math.PI);
@@ -526,7 +541,7 @@ export default function HorizontalParallaxGallery() {
     window.addEventListener("resize", onResize);
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("mousemove", onMouseMove);
- 
+
     imagesLoaded(container, () => {
       main.classList.remove("loading");
       document.body.classList.remove("loading");
@@ -536,48 +551,50 @@ export default function HorizontalParallaxGallery() {
         { opacity: 1, x: 0, scale: 1, duration: 2.0, stagger: 0.15, ease: "expo.out", delay: 0.6 }
       );
     });
- 
+
     const renderLoop = (time: number) => {
       if (destroyed) return;
       const t = time * 0.001;
       bgMaterial.uniforms.uTime.value = t;
       constellationUniforms.uTime.value = t;
- 
+
       scroll.target = clamp(0, scroll.limit, scroll.target);
       const prev = scroll.current;
       scroll.current = lerp(scroll.current, scroll.target, scroll.ease);
       const instantVelocity = (scroll.current - prev) / window.innerWidth;
       scroll.speed = lerp(scroll.speed, instantVelocity, 0.1);
- 
+
       container.style.transform = `translateX(${-scroll.current + scroll.offset}px)`;
- 
+
       let closestIdx = -1;
       let minDistance = 999;
       glMedias.forEach((m, i) => {
+        const distFromCenter = Math.abs(m.distance);
+        const opacity = 1.0 - clamp(distFromCenter * 2.5, 0, 1);
+        const scale = 1.0 - clamp(distFromCenter * 0.4, 0, 0.2);
+
         m.updatePosition(scroll.current, scroll.offset);
-        m.updateParallax(scroll.current, scroll.speed, t);
+        m.updateParallax(scroll.current, scroll.speed, t, scale);
+
         const d = Math.abs(m.distance);
         if (d < minDistance) { minDistance = d; closestIdx = i; }
- 
+
         const titleOverlay = m.el.parentElement?.querySelector('.image__title__overlay');
         if (titleOverlay) {
-          const distFromCenter = Math.abs(m.distance);
-          const opacity = 1.0 - clamp(distFromCenter * 2.5, 0, 1);
-          const scale = 1.0 - clamp(distFromCenter * 0.4, 0, 0.2);
-          const parallaxX = m.distance * 60;
-          const slideY = clamp(distFromCenter * 50, 0, 50);
- 
+          // Perfectly anchored to the box to prevent "moving out of box" issues
+          const parallaxX = 0;
+
           gsap.set(titleOverlay, {
             opacity: opacity,
             scale: scale,
-            x: parallaxX,
-            y: slideY,
+            x: 0,
+            y: 0,
             overwrite: true,
             display: opacity > 0.01 ? 'flex' : 'none'
           });
         }
       });
- 
+
       if (closestIdx !== -1 && projects[closestIdx]) {
         const targetColor = projects[closestIdx].color;
         const c = new THREE.Color(targetColor);
@@ -586,10 +603,10 @@ export default function HorizontalParallaxGallery() {
         gsap.to('.scroll__indicator__bar', { backgroundColor: targetColor, duration: 1 });
         root.style.setProperty('--accent-color', targetColor);
       }
- 
+
       const progress = scroll.current / scroll.limit;
       gsap.set('.scroll__indicator__bar', { scaleX: progress });
- 
+
       renderer.autoClear = false;
       renderer.clear();
       renderer.render(bgScene, bgCamera);
@@ -597,7 +614,7 @@ export default function HorizontalParallaxGallery() {
       animId = requestAnimationFrame(renderLoop);
     };
     renderLoop(0);
- 
+
     return () => {
       destroyed = true; cancelAnimationFrame(animId);
       window.removeEventListener("resize", onResize); window.removeEventListener("wheel", onWheel);
@@ -611,7 +628,7 @@ export default function HorizontalParallaxGallery() {
       if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
     };
   }, [projects]);
- 
+
   return (
     <>
       <style dangerouslySetInnerHTML={{
@@ -638,41 +655,46 @@ export default function HorizontalParallaxGallery() {
         .gallery__media__image__gl { position: absolute; opacity: 0; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
        
         .image__title__overlay {
-          position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+          position: absolute; top: 0; left: 0;
           width: 100%; height: 100%; padding: 0 5%; text-align: center; pointer-events: none; z-index: 20;
           display: flex; flex-direction: column; align-items: center; justify-content: center;
           box-sizing: border-box; opacity: 0;
           background: transparent;
         }
         .image__title__text {
-          font-size: clamp(2.5rem, 10vw, 7.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.15rem;
-          margin: 0; line-height: 0.8; color: var(--project-title);
+          font-size: clamp(2rem, 7vw, 5.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.1rem;
+          margin: 0; line-height: 0.95; color: var(--project-title);
           text-shadow: var(--project-glow, none);
           position: relative;
+          max-width: 100%;
+          overflow-wrap: break-word;
         }
         .image__desc__text {
-          font-size: 1.5rem; font-weight: 700; opacity: 1; margin: 1.5rem 0 0.5rem; letter-spacing: 0.15rem; text-transform: uppercase;
+          font-size: clamp(1rem, 2vw, 1.35rem); font-weight: 700; opacity: 1; margin: 1.2rem 0 0.4rem; letter-spacing: 0.1rem; text-transform: uppercase;
           color: var(--project-desc); font-family: var(--font-main);
           text-align: center;
         }
         .image__features__text {
-          font-size: 1.1rem; font-weight: 500; opacity: 0.8; margin-bottom: 2rem; letter-spacing: 0.3rem; text-transform: uppercase;
+          font-size: clamp(0.8rem, 1.2vw, 1rem); font-weight: 500; opacity: 0.8; margin-bottom: 1.5rem; letter-spacing: 0.2rem; text-transform: uppercase;
           color: var(--project-desc); font-family: var(--font-main);
           text-align: center;
-          margin-right: -0.3rem;
+          margin-right: -0.2rem;
         }
  
         .image__text__box {
-          background: rgba(0, 0, 0, 0.05);
-          backdrop-filter: blur(30px) saturate(180%);
-          padding: 4rem 5rem;
-          border-radius: 40px;
+          background: rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(40px) saturate(200%);
+          padding: clamp(1.5rem, 4%, 3rem) clamp(2rem, 6%, 4rem);
+          border-radius: 30px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          max-width: 95%;
+          justify-content: center;
+          width: 90%;
+          max-height: 90%;
           box-shadow: inset 0 0 20px rgba(255,255,255,0.02);
           transform-style: preserve-3d;
+          border: 1px solid rgba(255,255,255,0.05);
         }
  
         .view__project__btn {
@@ -693,12 +715,12 @@ export default function HorizontalParallaxGallery() {
         .scroll__indicator { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); width: 200px; height: 2px; background: rgba(255,255,255,0.1); z-index: 100; overflow: hidden; }
         .scroll__indicator__bar { width: 100%; height: 100%; transform-origin: left; transform: scaleX(0); background: #fff; }
       `}} />
- 
+
       <div ref={rootRef}>
         <header className="header">
           <h2 className="header__title">Lumzy // Archive</h2>
         </header>
- 
+
         <main className="loading" ref={mainRef}>
           <div className="content">
             <div className="gallery__wrapper__gl" ref={wrapperRef}>
@@ -749,5 +771,4 @@ export default function HorizontalParallaxGallery() {
     </>
   );
 }
- 
- 
+

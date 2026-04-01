@@ -66,7 +66,7 @@ export default function WebGLSlider() {
       <header className="test4-header" id="main-header">
         <div className="inner">
           <div className="logo" style={{ flex: 1 }}>
-            <img src="/logo.png" alt="Company Logo" style={{ height: '32px', width: 'auto' }} />
+            <img src="/logolumzy.jpg" alt="Company Logo" style={{ height: '70px', width: 'auto' }} />
           </div>
           <div className="burger" />
           <nav>

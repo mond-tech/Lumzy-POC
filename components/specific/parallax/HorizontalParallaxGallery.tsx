@@ -246,7 +246,7 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
     {
-      title: "NEURAL NETWORK",
+      title: "AI Chatbot",
       desc: "AI CHATBOT V2",
       features: "CONVERSE • LEARN • ASSIST",
       src: "/HorizontalParallaxGallery/ai_v2.png",
@@ -290,7 +290,7 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
     {
-      title: "FINTECH DASH",
+      title: "DASH FINTECH",
       desc: "SECURE ASSET PANEL",
       features: "MANAGE • SECURE • GROW",
       src: "/HorizontalParallaxGallery/fintech_v2.png",
@@ -301,7 +301,7 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
     {
-      title: "LOGISTICS HUB",
+      title: "HUB LOGISTIC",
       desc: "FLEET CONTROL SYS",
       features: "TRACK • ROUTE • DELIVER",
       src: "/HorizontalParallaxGallery/logistics_v2.jpg",
@@ -312,7 +312,7 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
     {
-      title: "LMS PLATFORM",
+      title: "LMS PORTAL",
       desc: "ED-LEARNING PORTAL",
       features: "STUDY • TEACH • MASTER",
       src: "/HorizontalParallaxGallery/lms_v2.jpg",
@@ -323,7 +323,7 @@ export default function HorizontalParallaxGallery() {
       hasGlow: true
     },
     {
-      title: "SAAS CRM CORE",
+      title: "SAAS CRMCORE",
       desc: "CLIENT RELATION SYS",
       features: "RETAIN • ENGAGE • CONVERT",
       src: "/HorizontalParallaxGallery/crm_v2.jpg",

@@ -40,6 +40,13 @@ const POC_LIST = [
     status: "Active",
   },
   {
+    title: "Timeline Slider",
+    desc: "Timeline-based content slider with dynamic masking and blur.",
+    path: "/timeline",
+    color: "from-white-500/20 to-transparent",
+    status: "Beta",
+  },
+  {
     title: "Water Shader",
     desc: "Interactive fluid simulation overlay for any content.",
     path: "/water",

@@ -5,11 +5,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Head from "next/head";
 
-const FRAME_COUNT = 240;
+const FRAME_COUNT = 192;
 const START_FRAME = 1;
 
 const getFrameUrl = (index: number) => {
-  return `/Ps5ControllerFrames/ezgif-frame-${index.toString().padStart(3, "0")}.jpg`;
+  return `/frames/frame_${index.toString().padStart(4, "0")}.jpg`;
 };
 
 export default function ControllerPage() {
@@ -184,43 +184,43 @@ export default function ControllerPage() {
           
           {/* HERO (0 - 15%) */}
           <motion.div
-            className="absolute inset-x-0 bottom-[15vh] flex flex-col items-center justify-end pointer-events-none text-center px-4 z-10 mix-blend-difference"
+            className="absolute inset-x-0 bottom-[15vh] flex flex-col items-center justify-end pointer-events-none text-center px-4 z-10"
             style={{ opacity: heroOpacity, y: heroY }}
           >
-            <h1 className="text-6xl md:text-[7rem] leading-[1.1] font-bold tracking-tight mb-2 text-white">
+            <h1 className="text-6xl md:text-[7rem] leading-[1.1] font-bold tracking-tight mb-2 text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
               Sony WH‑1000XM6
             </h1>
-            <p className="text-2xl md:text-3xl font-medium tracking-tight text-white/90">
+            {/* <p className="text-2xl md:text-3xl font-medium tracking-tight text-white/90 drop-shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
               Silence, perfected.
-            </p>
+            </p> */}
           </motion.div>
 
           {/* ENGINEERING REVEAL (15 - 40%) */}
           <motion.div
-            className="absolute inset-y-0 left-0 md:left-[10vw] flex flex-col justify-center pointer-events-none px-6 z-10 mix-blend-difference"
+            className="absolute inset-y-0 left-0 md:left-[10vw] flex flex-col justify-center pointer-events-none px-6 z-10"
             style={{ opacity: engineeringOpacity, y: engineeringY }}
           >
-            <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white">
+            <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
               Precision-<br/>engineered.
             </h2>
           </motion.div>
 
           {/* NOISE CANCELLING (40 - 65%) */}
           <motion.div
-            className="absolute inset-y-0 right-0 md:right-[10vw] flex flex-col justify-center items-start md:items-end pointer-events-none px-6 text-left md:text-right z-10 mix-blend-difference"
+            className="absolute inset-y-0 right-0 md:right-[10vw] flex flex-col justify-center items-start md:items-end pointer-events-none px-6 text-left md:text-right z-10"
             style={{ opacity: noiseOpacity, y: noiseY }}
           >
-            <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white">
+            <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
               Adaptive <br/> noise cancelling.
             </h2>
           </motion.div>
 
           {/* SOUND & UPSCALING (65 - 85%) */}
           <motion.div
-            className="absolute inset-y-0 left-0 md:left-[10vw] flex flex-col justify-center pointer-events-none px-6 z-10 mix-blend-difference"
+            className="absolute inset-y-0 left-0 md:left-[10vw] flex flex-col justify-center pointer-events-none px-6 z-10"
             style={{ opacity: soundOpacity, y: soundY }}
           >
-            <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white">
+            <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
               Immersive, <br/> lifelike sound.
             </h2>
           </motion.div>
@@ -230,11 +230,11 @@ export default function ControllerPage() {
             className="absolute inset-0 flex flex-col items-center justify-end pb-[15vh] pointer-events-none z-20"
             style={{ opacity: ctaOpacity, y: ctaY }}
           >
-            <h2 className="text-5xl md:text-[6rem] leading-[1.1] font-bold tracking-tight mb-12 text-white text-center px-4 max-w-5xl mix-blend-difference">
+            {/* <h2 className="text-5xl md:text-[6rem] leading-[1.1] font-bold tracking-tight mb-12 text-white text-center px-4 max-w-5xl drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
               Hear everything. <br/> Feel nothing else.
-            </h2>
+            </h2> */}
             <div className="flex flex-col sm:flex-row items-center gap-8 pointer-events-auto">
-              <button className="px-12 py-5 text-[17px] font-semibold text-black rounded-full bg-white hover:bg-neutral-200 transition-all duration-500 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+              <button className="px-12 py-5 text-[17px] font-semibold text-white rounded-full bg-black hover:bg-black/70 transition-all duration-500 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
                 Experience WH‑1000XM6
               </button>
             </div>

@@ -5,6 +5,13 @@ import PocCard from "@/components/PocCard";
 
 const POC_LIST = [
   {
+    title: "PS-5 Controller",
+    desc: "Interactive 3D PS-5 controller with dynamic lighting and reflections.",
+    path: "/controller",
+    color: "from-blue-800/70 to-transparent",
+    status: "Stable",
+  },
+  {
     title: "UI/UX POC 1",
     desc: "UI/UX POC with dynamic reflections and refractions.",
     path: "/square",

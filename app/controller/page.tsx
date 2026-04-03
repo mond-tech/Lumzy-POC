@@ -133,8 +133,8 @@ export default function ControllerPage() {
   return (
     <main className="bg-[#050505] text-white min-h-screen font-sans selection:bg-[#00D6FF] selection:text-black">
       <Head>
-        <title>Sony WH-1000XM6</title>
-        <meta name="description" content="Silence, perfected. The flagship wireless noise cancelling headphones from Sony." />
+        <title>PlayStation 5 DualSense</title>
+        <meta name="description" content="DualSense wireless controller with adaptive triggers and haptic feedback for immersive PS5 gaming." />
       </Head>
 
       {/* NAVBAR */}
@@ -159,7 +159,7 @@ export default function ControllerPage() {
         </div>
         <div>
           <button className="px-5 py-2 text-[15px] font-medium text-white rounded-full bg-gradient-to-r from-[#0050FF]/25 to-[#00D6FF]/25 border border-white/10 hover:border-[#00D6FF]/60 hover:shadow-[0_0_15px_rgba(0,214,255,0.25)] transition-all duration-300">
-            Experience WH‑1000XM6
+            Premium Experience
           </button>
         </div>
       </motion.nav>
@@ -188,11 +188,11 @@ export default function ControllerPage() {
             style={{ opacity: heroOpacity, y: heroY }}
           >
             <h1 className="text-6xl md:text-[7rem] leading-[1.1] font-bold tracking-tight mb-2 text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
-              Sony WH‑1000XM6
+              DualSense PS5
             </h1>
-            {/* <p className="text-2xl md:text-3xl font-medium tracking-tight text-white/90 drop-shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
-              Silence, perfected.
-            </p> */}
+            <p className="text-2xl md:text-3xl font-medium tracking-tight text-white/90 drop-shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
+              Experience ultra-responsive haptics & adaptive triggers.
+            </p>
           </motion.div>
 
           {/* ENGINEERING REVEAL (15 - 40%) */}
@@ -201,7 +201,8 @@ export default function ControllerPage() {
             style={{ opacity: engineeringOpacity, y: engineeringY }}
           >
             <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
-              Precision-<br/>engineered.
+              Haptic feedback,
+              <br /> tuned for every strike.
             </h2>
           </motion.div>
 
@@ -211,7 +212,8 @@ export default function ControllerPage() {
             style={{ opacity: noiseOpacity, y: noiseY }}
           >
             <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
-              Adaptive <br/> noise cancelling.
+              Adaptive triggers
+              <br /> for total control.
             </h2>
           </motion.div>
 
@@ -221,7 +223,8 @@ export default function ControllerPage() {
             style={{ opacity: soundOpacity, y: soundY }}
           >
             <h2 className="text-5xl md:text-[5rem] leading-[1.1] font-bold tracking-tight text-white drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)]">
-              Immersive, <br/> lifelike sound.
+              3D audio ready
+              <br /> for next-gen immersion.
             </h2>
           </motion.div>
 
@@ -235,7 +238,7 @@ export default function ControllerPage() {
             </h2> */}
             <div className="flex flex-col sm:flex-row items-center gap-8 pointer-events-auto">
               <button className="px-12 py-5 text-[17px] font-semibold text-white rounded-full bg-black hover:bg-black/70 transition-all duration-500 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
-                Experience WH‑1000XM6
+                Premium Experience
               </button>
             </div>
           </motion.div>

@@ -9,7 +9,7 @@ const FRAME_COUNT = 192;
 const START_FRAME = 1;
 
 const getFrameUrl = (index: number) => {
-  return `/frames/frame_${index.toString().padStart(4, "0")}.jpg`;
+  return `/frames-q/frame_${index.toString().padStart(4, "0")}.jpg`;
 };
 
 export default function ControllerPage() {

@@ -6,7 +6,7 @@ import PocCard from "@/components/PocCard";
 const POC_LIST = [
   {
     title: "Robo Scroll",
-    desc: "Cyberpunt robo moving on scroll",
+    desc: "Lumzy robo moving on scroll",
     path: "/robo",
     color: "from-blue-800/70 to-transparent",
     status: "Stable",

@@ -67,7 +67,7 @@ const SeoxPoc: React.FC = () => {
         <div className="seox-container">
           <nav className="seox-nav">
             <div className="seox-logo">
-              <img src="/logo.png" alt="Lumzy" style={{ maxHeight: '42px', filter: 'brightness(0) invert(1)' }} />
+              <img src="/logo.png" alt="Lumzy" style={{ maxHeight: '60px', width: 'auto', objectFit: 'contain' }} />
             </div>
 
             <ul className="seox-menu">
@@ -263,7 +263,7 @@ const SeoxPoc: React.FC = () => {
         <div className="seox-container">
           <div className="seox-footer-top">
             <div className="seox-footer-logo">
-              <img src="/logo.png" alt="Lumzy" style={{ maxHeight: '42px', filter: 'brightness(0) invert(1)' }} />
+              <img src="/logo.png" alt="Lumzy" style={{ maxHeight: '60px', width: 'auto', objectFit: 'contain' }} />
             </div>
             <div className="seox-footer-socials">
               {['Twitter', 'Instagram', 'Dribbble', 'LinkedIn'].map((social) => (

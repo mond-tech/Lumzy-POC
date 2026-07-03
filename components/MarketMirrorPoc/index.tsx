@@ -24,7 +24,7 @@ const LumzyPoc: React.FC = () => {
         <div className="seox-container" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 4vw' }}>
           <div className="seox-footer-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
             <div className="seox-footer-logo">
-              <img src="/logo.png" alt="Lumzy" style={{ maxHeight: '42px', filter: 'brightness(0) invert(1)' }} />
+              <img src="/logo.png" alt="Lumzy" style={{ maxHeight: '60px', width: 'auto', objectFit: 'contain' }} />
             </div>
             <div className="seox-footer-socials" style={{ display: 'flex', gap: '25px' }}>
               {['Twitter', 'Instagram', 'Dribbble', 'LinkedIn'].map((social) => (

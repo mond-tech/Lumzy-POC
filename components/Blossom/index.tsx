@@ -92,7 +92,7 @@ const BlossomPoc: React.FC = () => {
       <aside className={`blossom-sidebar ${menuOpen ? 'open' : ''}`}>
         <div className="blossom-logo-area">
           <div className="blossom-logo">
-            <img src="/logo.png" alt="Lumzy" />
+            <img src="/logo.png" alt="Lumzy" style={{ height: '65px', width: 'auto', objectFit: 'contain' }} />
           </div>
         </div>
 
@@ -287,7 +287,7 @@ const BlossomPoc: React.FC = () => {
           <div className="footer-container">
             <div className="footer-top">
               <div className="footer-logo">
-                <img src="/logo.png" alt="Lumzy" style={{ height: '50px', width: 'auto' }} />
+                <img src="/logo.png" alt="Lumzy" style={{ height: '65px', width: 'auto', objectFit: 'contain' }} />
               </div>
               <div className="footer-socials">
                 <a href="#"><i className="fa-brands fa-facebook-f"></i></a>
